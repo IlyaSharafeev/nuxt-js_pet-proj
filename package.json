@@ -10,5 +10,9 @@
   "devDependencies": {
     "nuxt": "3.0.0",
     "sass": "^1.57.1"
+  },
+  "dependencies": {
+    "@vueuse/core": "^9.9.0",
+    "vue": "^3.2.45"
   }
 }

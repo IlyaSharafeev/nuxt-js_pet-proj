@@ -5,14 +5,14 @@
     </title>
     <div class="box">
       <div id="sticky-notes">
-        <div class="sticky-note-1" @mousedown="onMouseAction($event)" @dragstart="() => false" ref="stickyOneItem">
+        <div class="sticky-note-1" ref="stickyOne" :style="stickyOneStyle">
           <div class="sticky-text">
             {{stickyTextRed}}
           </div>
           <div class="bottom-strip-1">
           </div>
         </div>
-        <div class="sticky-note-2" @mousedown="onMouseAction($event)" @dragstart="() => false" ref="stickyTwoItem">
+        <div class="sticky-note-2" ref="stickyTwo" :style="stickyTwoStyle">
           <div class="sticky-text">
             {{stickyTextYellow}}
           </div>
@@ -29,13 +29,10 @@
         <div class="grain-6"></div>
       </div>
       <div class="computer-container">
-        <div class="pen" @mousedown="onMouseAction($event)" @dragstart="() => false" ref="penItem">
-          <div class="cap"></div>
-          <div class="end"></div>
-        </div>
+
         <div class="screen">
           <div class="logo-container">
-            <img class="screen-logo" alt="img alt" />
+            <img class="screen-logo" alt="img alt" src="@/assets/images/logo-onix.jpg" />
           </div>
 
         </div>
@@ -99,11 +96,15 @@
           </div>
           <div class="trackpad"></div>
         </div>
-        <div class="mouse" @mousedown="onMouseAction($event)" @dragstart="() => false" ref="mouseItem">
-          <div class="tracker"></div>
-        </div>
       </div>
-      <div class="gameboy" @mousedown="onMouseAction($event)" @dragstart="() => false" ref="gameboyItem">
+      <div class="pen" ref="pen" :style="penStyle">
+        <div class="cap"></div>
+        <div class="end"></div>
+      </div>
+      <div class="mouse" ref="mouse" :style="mouseStyle">
+        <div class="tracker"></div>
+      </div>
+      <div class="gameboy" ref="gameboy" :style="gamebodyStyle">
         <div class="gameboy-screen-back">
           <div class="gameboy-screen-front"></div>
         </div>
@@ -116,7 +117,6 @@
         <div class="start"></div>
         <div class="select"></div>
       </div>
-
     </div>
   </div>
 </template>
@@ -128,74 +128,36 @@ definePageMeta({
 
 const stickyTextRed = ref("123");
 const stickyTextYellow = ref("456");
-const mouseItem = ref(null);
-const penItem = ref(null);
-const gameboyItem = ref(null);
-const stickyOneItem = ref(null);
-const stickyTwoItem = ref(null);
 
-// dragging elements around the page
-function onMouseAction(e) {
-  let dragableItem;
+import { ref } from 'vue'
+import { useDraggable } from '@vueuse/core'
 
-  if(mouseItem.value === e.target) {
-    console.log(mouseItem.value.style);
-    mouseItem.value.style.width = 50;
-    dragableItem = mouseItem;
-  }
+const gameboy = ref(null);
+const stickyOne = ref(null);
+const stickyTwo = ref(null);
+const pen = ref(null);
+const mouse = ref(null);
 
-  if(penItem.value === e.target) {
-    dragableItem = penItem;
-  }
+// `style` will be a helper computed for `left: ?px; top: ?px;`
+const gamebodyStyle = useDraggable(gameboy, {
+  initialValue: { x: 1200, y: 500 },
+}).style;
 
-  if(gameboyItem.value === e.target) {
-    dragableItem = gameboyItem;
-  }
+const stickyOneStyle = useDraggable(stickyOne, {
+  initialValue: { x: 200, y: 200 },
+}).style;
 
-  if(stickyOneItem.value === e.target) {
-    dragableItem = stickyOneItem;
-  }
+const stickyTwoStyle = useDraggable(stickyTwo, {
+  initialValue: { x: 100, y: 100 },
+}).style;
 
-  if(stickyTwoItem.value === e.target) {
-    dragableItem = stickyTwoItem;
-  }
+const penStyle = useDraggable(pen, {
+  initialValue: { x: 400, y: 400 },
+}).style;
 
-  const coords = getCoords(dragableItem.value);
-  let shiftX = e.pageX - coords.left;
-  let shiftY = e.pageY - coords.top;
-
-  document.body.appendChild(dragableItem.value);
-  moveAt(e);
-
-  dragableItem.value.style.zIndex = 1000; // над другими элементами
-
-  function moveAt(e) {
-    const dragableItemLeft = e.pageX - shiftX + 'px'
-    console.log(+dragableItem.value.style.width);
-    console.log(+(e.pageX - shiftX));
-    dragableItem.value.style.left = dragableItemLeft;
-    dragableItem.value.style.top = e.pageY - shiftY + 'px';
-  }
-
-  document.onmousemove = function(e) {
-    moveAt(e);
-  };
-
-  dragableItem.value.onmouseup = function() {
-
-    document.onmousemove = null;
-    dragableItem.value.onmouseup = null;
-  };
-}
-
-// get coords
-function getCoords(elem) {   // кроме IE8-
-  const box = elem.getBoundingClientRect();
-  return {
-    top: box.top + pageYOffset,
-    left: box.left + pageXOffset
-  };
-}
+const mouseStyle = useDraggable(mouse, {
+  initialValue: { x: 850, y: 500 },
+}).style;
 </script>
 
 <style scoped lang="scss">
@@ -326,11 +288,7 @@ body{
   background: none;
 }
 .screen-logo{
-  position: absolute;
-  width: 80%;
-  left: 10%;
   height: 100%;
-
 }
 
 .keyboard-container{
@@ -611,6 +569,7 @@ body{
   z-index: 4;
   top: 10%;
   left: 5%;
+  cursor: pointer;
 }
 
 .sticky-note-2{
@@ -621,6 +580,7 @@ body{
   z-index: 4;
   top: 33%;
   left: 9%;
+  cursor: pointer;
 }
 
 .bottom-strip-1{
@@ -687,6 +647,7 @@ body{
   bottom: -25%;
   right: -30%;
   border-radius: 15px;
+  cursor: pointer;
 }
 
 
@@ -717,6 +678,8 @@ body{
   background: white;
   top: 60%;
   left: -20%;
+  z-index: 4;
+  cursor: pointer;
 }
 
 .cap{
@@ -746,6 +709,7 @@ body{
   z-index: 4;
   border-radius: 10px 10px 10px 25px;
   background: #8849bc;
+  cursor: pointer;
 }
 
 .gameboy-screen-back{
