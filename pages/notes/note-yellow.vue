@@ -1,13 +1,13 @@
 <template>
 <div>
-  <slot/>
+  <h2>note yellow</h2>
 </div>
 </template>
 
 <script>
-export default {
-  name: "notes"
-}
+definePageMeta({
+  layout: 'desktop'
+})
 </script>
 
 <style scoped>
