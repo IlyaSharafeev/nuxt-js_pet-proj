@@ -10,7 +10,22 @@
         </div>
         <div class="menu_topbar_right">
           <div class="lang">
-            <img src="@/assets/images/ukraine-flag.jpg" alt="ukraine-flag">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img v-if="$i18n.getLocaleCookie() === 'ua'" src="@/assets/images/english-flag.png" alt="ukraine-flag">
+                <img v-if="$i18n.getLocaleCookie() === 'en'" src="@/assets/images/ukraine-flag.jpg" alt="english-flag">
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'ua'" href="#" @click.prevent.stop="$i18n.setLocale('en')">
+                    <img src="@/assets/images/ukraine-flag.jpg"/>
+                    {{$t('lang')}}
+                  </a>
+                  <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'en'" href="#" @click.prevent.stop="$i18n.setLocale('ua')">
+                    <img src="@/assets/images/english-flag.png"/>
+                    {{$t('lang')}}
+                  </a>
+                </li>
+              </ul>
           </div>
           <div class="battery">
             <span>{{getBatteryLevel()}}%</span>
@@ -1297,13 +1312,40 @@ a {
       align-items: center;
       color: #fff;
       .lang {
-        margin: 0 30px;
-        max-width: 15px;
-        height: 10px;
+        margin: 0 10px;
+
+        .dropdown-toggle {
+          padding: 0 10px;
+          margin-top: 4px;
+          background: none;
+          border: none;
+
+          &::after {
+            //display: none;
+            content: initial;
+          }
+        }
+
+        .dropdown-menu {
+          background: none;
+          min-width: initial;
+          width: auto;
+          padding: 0;
+
+          a {
+            &:hover {
+              background: rgba(255, 255, 255, 0.15);
+            }
+          }
+
+          img {
+            width: 25px;
+          }
+        }
+
 
         img {
-          width: 100%;
-          height: 100%;
+          width: 20px;
         }
       }
       .bluetooth {
