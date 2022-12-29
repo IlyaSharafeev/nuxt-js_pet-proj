@@ -12,12 +12,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "notes"
-}
-</script>
-
 <style scoped lang="scss">
 .box{
   position: relative;

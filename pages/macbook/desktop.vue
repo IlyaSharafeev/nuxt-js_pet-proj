@@ -105,18 +105,18 @@
             </div>
           </button>
         </div>
-        <div class="folder_wrapper" ref="folderResume" :style="folderResumeStyle">
-          <a class="btn_folder" href="#">
-            <div class="folder">
-              <div class="folder_icon">
-                <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/hh.png?raw=true" alt="">
-              </div>
-              <div class="folder_name">
-                скачать резюме.doc
-              </div>
-            </div>
-          </a>
-        </div>
+<!--        <div class="folder_wrapper" ref="folderResume" :style="folderResumeStyle">-->
+<!--          <a class="btn_folder" href="./assets/images/logo-onix.jpg" download="">-->
+<!--            <div class="folder">-->
+<!--              <div class="folder_icon">-->
+<!--                <img src="@/assets/images/ukraine-flag.jpg" alt="">-->
+<!--              </div>-->
+<!--              <div class="folder_name">-->
+<!--                скачать резюме.doc-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </a>-->
+<!--        </div>-->
       </div>
 
       <div id="soc" class="open_folder_solo" onclick="style.zIndex = zindex++">
@@ -277,7 +277,7 @@
 
 <script setup>
 import { useBattery } from '@vueuse/core'
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {useDraggable} from "@vueuse/core/index";
 
 const { charging, level } = useBattery()
@@ -297,6 +297,10 @@ const folderAboutMe = ref(null);
 const folderScills = ref(null);
 const folderPortfolio = ref(null);
 const folderResume = ref(null);
+
+useHead({
+  titleTemplate: '%s - computer',
+})
 
 const folderSocStyle = useDraggable(folderSoc, {
   initialValue: { x: 0, y: 100 },

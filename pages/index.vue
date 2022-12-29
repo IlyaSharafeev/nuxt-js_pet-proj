@@ -1,8 +1,5 @@
 <template>
   <div id="desk">
-    <title>
-      Desktop
-    </title>
       <div id="sticky-notes">
         <NuxtLink to="/notes/note-red">
           <div class="sticky-note-red" ref="stickyRed" :style="stickyRedStyle">
@@ -119,6 +116,10 @@
 <script setup>
 definePageMeta({
   layout: 'desktop'
+})
+
+useHead({
+  titleTemplate: '%s',
 })
 
 const stickyTextRed = ref("123");

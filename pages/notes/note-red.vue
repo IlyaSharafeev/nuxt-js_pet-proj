@@ -8,6 +8,10 @@
 definePageMeta({
   layout: 'desktop'
 })
+
+useHead({
+  titleTemplate: '%s - note red',
+})
 </script>
 
 <style scoped>
