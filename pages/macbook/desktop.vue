@@ -286,12 +286,14 @@
           </div>
         </div>
       </div>
+
+      <ThePopovers @close="closePopovers" v-if="showPopovers" :positionX="positionXPopovers" :positionY="positionYPopovers"/>
     </div>
   </section>
 </template>
 
 <script setup>
-import { useBattery } from '@vueuse/core'
+import {useBattery} from '@vueuse/core'
 import {onMounted, ref} from "vue";
 import {useDraggable} from "@vueuse/core/index";
 
@@ -311,7 +313,11 @@ const folderSoc = ref(null);
 const folderAboutMe = ref(null);
 const folderScills = ref(null);
 const folderPortfolio = ref(null);
-const folderResume = ref(null);
+// const folderResume = ref(null);
+const showPopovers = ref(false);
+const positionXPopovers = ref();
+const positionYPopovers = ref();
+
 
 useHead({
   titleTemplate: '%s - computer',
@@ -333,9 +339,28 @@ const folderPortfolioStyle = useDraggable(folderPortfolio, {
   initialValue: { x: 0, y: 400 },
 }).style;
 
-const folderResumeStyle = useDraggable(folderResume, {
-  initialValue: { x: 0, y: 500 },
-}).style;
+// const folderResumeStyle = useDraggable(folderResume, {
+//   initialValue: { x: 0, y: 500 },
+// }).style;
+
+const mouseRightClick = (event) => {
+  positionXPopovers.value = event.pageX;
+  positionYPopovers.value = event.pageY;
+  showPopovers.value = true;
+};
+
+const closePopovers = (statePopovers) => {
+  console.log(statePopovers);
+  showPopovers.value = statePopovers
+}
+
+// disabling the default modal on right click and calling a function on click
+onMounted(() => {
+  document.oncontextmenu = function () {
+    mouseRightClick(event)
+    return false;
+  };
+})
 </script>
 
 <style scoped lang="scss">
