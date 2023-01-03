@@ -2,8 +2,8 @@
   <div class="container">
     <!-- code here -->
     <div class="menu" ref="target" :style="{'top': props.positionY + 'px', 'left': props.positionX + 'px'}">
-      <ul class="menu-list">
-        <li class="menu-item"><button class="menu-button"><Icon name="ep:edit-pen" />Rename</button></li>
+      <ul class="menu-list" v-if="popoverOptions.rename">
+        <li class="menu-item" @click="rename"><button class="menu-button"><Icon name="ep:edit-pen" />Rename</button></li>
       </ul>
       <ul class="menu-list">
         <li class="menu-item"><button class="menu-button menu-button--black"><i data-feather="circle"></i>No status<i data-feather="chevron-right"></i></button>
@@ -14,10 +14,9 @@
             <li class="menu-item"><button class="menu-button menu-button--black menu-button--checked"><i data-feather="circle"></i>No status<i data-feather="check"></i></button></li>
           </ul>
         </li>
-        <li class="menu-item"><button class="menu-button"><Icon name="ep:circle-plus-filled" />Create a folder</button></li>
-        <li class="menu-item"><button class="menu-button menu-button--download"><Icon name="ep:loading" />Download</button></li>
+        <li class="menu-item" v-if="popoverOptions.create"><button class="menu-button"><Icon name="ep:circle-plus-filled" />Create a folder</button></li>
       </ul>
-      <ul class="menu-list">
+      <ul class="menu-list" v-if="popoverOptions.delete">
         <li class="menu-item"><button class="menu-button menu-button--delete"><Icon name="ep:close-bold" />Delete</button></li>
       </ul>
     </div>
@@ -25,19 +24,29 @@
 </template>
 
 <script setup>
-import {ref, watch} from "vue";
+import {ref} from "vue";
 import { onClickOutside } from '@vueuse/core'
+import {useDesktopStore} from "../store/desktop";
 
 const emit = defineEmits([
-    'close'
+    'close',
+    'editMode'
 ])
 
 const props = defineProps(({
   positionX: Number,
-  positionY: Number
+  positionY: Number,
+  popoverOptions: Object,
 }))
 
+const desktopStore = useDesktopStore();
+
 const target = ref(null);
+
+const rename = () => {
+  desktopStore.onEditMode();
+  emit('close', false);
+}
 
 onClickOutside(target, () => emit('close', false));
 </script>

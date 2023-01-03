@@ -6,7 +6,9 @@
           <div class="mini_logo">
             <img src="@/assets/images/logo-desktop.png" alt="logo-desktop">
           </div>
-          <span>Resume</span>
+          <NuxtLink to="/">
+            <span>Come home</span>
+          </NuxtLink>
         </div>
         <div class="menu_topbar_right">
           <div class="lang">
@@ -72,222 +74,10 @@
 
     <div class="desktop">
       <div class="desktop_folders">
-        <div class="folder_wrapper" ref="folderSoc" :style="folderSocStyle">
-          <button id="soc_btn" class="btn_folder">
-            <div class="folder">
-              <div class="folder_icon">
-                <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/folder1.png?raw=true" alt="">
-              </div>
-              <div class="folder_name">
-                Мои соц. сети
-              </div>
-            </div>
-          </button>
-        </div>
-        <div class="folder_wrapper" ref="folderAboutMe" :style="folderAboutMeStyle">
-          <button id="about_btn" class="btn_folder">
-            <div class="folder">
-              <div class="folder_icon">
-                <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/folder1.png?raw=true" alt="">
-              </div>
-              <div class="folder_name">
-                Обо мне
-              </div>
-            </div>
-          </button>
-        </div>
-        <div class="folder_wrapper" ref="folderScills" :style="folderScillsStyle">
-          <button class="btn_folder" id="btn_skills">
-            <div class="folder">
-              <div class="folder_icon">
-                <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/folder1.png?raw=true" alt="">
-              </div>
-              <div class="folder_name">
-                Навыки
-              </div>
-            </div>
-          </button>
-        </div>
-        <div class="folder_wrapper" ref="folderPortfolio" :style="folderPortfolioStyle">
-          <button class="btn_folder">
-            <div class="folder">
-              <div class="folder_icon">
-                <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/folder1.png?raw=true" alt="">
-              </div>
-              <div class="folder_name">
-                Портфолио
-              </div>
-            </div>
-          </button>
-        </div>
-<!--        <div class="folder_wrapper" ref="folderResume" :style="folderResumeStyle">-->
-<!--          <a class="btn_folder" href="./assets/images/logo-onix.jpg" download="">-->
-<!--            <div class="folder">-->
-<!--              <div class="folder_icon">-->
-<!--                <img src="@/assets/images/ukraine-flag.jpg" alt="">-->
-<!--              </div>-->
-<!--              <div class="folder_name">-->
-<!--                скачать резюме.doc-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </a>-->
-<!--        </div>-->
+        <FoldersDesktop/>
       </div>
 
-      <div id="soc" class="open_folder_solo" onclick="style.zIndex = zindex++">
-        <div class="open_folder_panel">
-          <div class="open_folder_panel_close">
-            <button id="close_soc" class="close_icon">
-              <i class="fa fa-times" aria-hidden="true"></i>
-            </button>
-          </div>
-          <div class="open_folder_panel_title">
-            <span>Мои соц. сети</span>
-          </div>
-        </div>
-        <div class="open_folder_content">
-          <div class="folder_wrapper">
-            <a class="btn_folder" target="_blank" href="https://vk.com/zanyy">
-              <div class="folder">
-                <div class="folder_icon">
-                  <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/vk.png?raw=true" alt="">
-                </div>
-                <div class="folder_name">
-                  vk
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="folder_wrapper">
-            <a class="btn_folder" target="_blank" href="https://www.facebook.com/zanyalbert">
-              <div class="folder">
-                <div class="folder_icon">
-                  <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/facebook.png?raw=true" alt="">
-                </div>
-                <div class="folder_name">
-                  facebook
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="folder_wrapper">
-            <a class="btn_folder" target="_blank" href="https://spb.hh.ru/resume/75f3285eff058554980039ed1f38786178507a">
-              <div class="folder">
-                <div class="folder_icon">
-                  <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/hh.png?raw=true" alt="">
-                </div>
-                <div class="folder_name">
-                  резюме на HH
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="folder_wrapper">
-            <a class="btn_folder" target="_blank" href="https://github.com/seuraltimez">
-              <div class="folder">
-                <div class="folder_icon">
-                  <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/github.png?raw=true" alt="">
-                </div>
-                <div class="folder_name">
-                  github
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="folder_wrapper">
-            <a class="btn_folder" target="_blank" href="https://www.instagram.com/zaaany/">
-              <div class="folder">
-                <div class="folder_icon">
-                  <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/instagram.png?raw=true" alt="">
-                </div>
-                <div class="folder_name">
-                  instagram
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div id="about" class="open_folder_solo" onclick="style.zIndex = zindex++">
-        <div class="open_folder_panel">
-          <div class="open_folder_panel_close">
-            <button id="close_about" class="close_icon">
-              <i class="fa fa-times" aria-hidden="true"></i>
-            </button>
-          </div>
-          <div class="open_folder_panel_title">
-            <span>Обо мне</span>
-          </div>
-        </div>
-        <div class="open_folder_content">
-          <div class="folder_wrapper">
-            <a class="btn_folder" data-fancybox="" href="https://github.com/seuraltimez/desktopmac/blob/master/img/src/me-min.JPG?raw=true">
-              <div class="folder">
-                <div class="folder_icon">
-                  <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/me-min.JPG?raw=true" alt="">
-                </div>
-                <div class="folder_name">
-                  моя фотка.jpg
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="folder_wrapper">
-            <a class="btn_folder word" data-fancybox="" href="https://spb.hh.ru/resume/75f3285eff058554980039ed1f38786178507a">
-              <div class="folder">
-                <div class="folder_icon">
-                  <img src="img/src/DOC.png" alt="">
-                </div>
-                <div class="folder_name">
-                  обо мне.doc
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div id="skills" class="open_folder_solo" onclick="style.zIndex = zindex++">
-        <div class="open_folder_panel">
-          <div class="open_folder_panel_close">
-            <button id="close_about" class="close_icon">
-              <i class="fa fa-times" aria-hidden="true"></i>
-            </button>
-          </div>
-          <div class="open_folder_panel_title">
-            <span>Навыки</span>
-          </div>
-        </div>
-        <div class="open_folder_content">
-          <div class="folder_wrapper">
-            <a class="btn_folder" data-fancybox="" href="https://github.com/seuraltimez/desktopmac/blob/master/img/src/me-min.JPG?raw=true">
-              <div class="folder">
-                <div class="folder_icon">
-                  <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/me-min.JPG?raw=true" alt="">
-                </div>
-                <div class="folder_name">
-                  моя фотка.jpg
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="folder_wrapper">
-            <a class="btn_folder word" data-fancybox="" href="https://spb.hh.ru/resume/75f3285eff058554980039ed1f38786178507a">
-              <div class="folder">
-                <div class="folder_icon">
-                  <img src="img/src/DOC.png" alt="">
-                </div>
-                <div class="folder_name">
-                  обо мне.doc
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <ThePopovers @close="closePopovers" v-if="showPopovers" :positionX="positionXPopovers" :positionY="positionYPopovers"/>
+      <ThePopoverDesktopPage @close="closePopovers" v-if="showPopovers" :popoverOptions="popoverOptions" :positionX="positionXPopovers" :positionY="positionYPopovers"/>
     </div>
   </section>
 </template>
@@ -295,9 +85,24 @@
 <script setup>
 import {useBattery} from '@vueuse/core'
 import {onMounted, ref} from "vue";
-import {useDraggable} from "@vueuse/core/index";
+import ThePopoverDesktopPage from "/components/ThePopoverDesktopPage.vue";
+import FoldersDesktop from "../../components/FoldersDesktop";
+import {useDesktopStore} from "../../store/desktop";
 
 const { charging, level } = useBattery()
+const desktopStore = useDesktopStore();
+
+useHead({
+  titleTemplate: '%s - computer',
+})
+
+// disabling the default modal on right click and calling a function on click
+onMounted(() => {
+  document.oncontextmenu = function () {
+    mouseRightClick(event)
+    return false;
+  };
+})
 
 const getBatteryLevel = () => {
   const arr = String(level.value).split('');
@@ -309,58 +114,37 @@ const getBatteryLevel = () => {
   return 100;
 };
 
-const folderSoc = ref(null);
-const folderAboutMe = ref(null);
-const folderScills = ref(null);
-const folderPortfolio = ref(null);
-// const folderResume = ref(null);
 const showPopovers = ref(false);
 const positionXPopovers = ref();
 const positionYPopovers = ref();
-
-
-useHead({
-  titleTemplate: '%s - computer',
-})
-
-const folderSocStyle = useDraggable(folderSoc, {
-  initialValue: { x: 0, y: 100 },
-}).style;
-
-const folderAboutMeStyle = useDraggable(folderAboutMe, {
-  initialValue: { x: 0, y: 200 },
-}).style;
-
-const folderScillsStyle = useDraggable(folderScills, {
-  initialValue: { x: 0, y: 300 },
-}).style;
-
-const folderPortfolioStyle = useDraggable(folderPortfolio, {
-  initialValue: { x: 0, y: 400 },
-}).style;
-
-// const folderResumeStyle = useDraggable(folderResume, {
-//   initialValue: { x: 0, y: 500 },
-// }).style;
+const popoverOptions = {
+  rename: false,
+  create: true,
+}
 
 const mouseRightClick = (event) => {
+  if(event.target.closest("div[data-folder]")){
+    popoverOptions.rename = true;
+    popoverOptions.create = false;
+    popoverOptions.delete = true;
+    positionXPopovers.value = event.pageX;
+    positionYPopovers.value = event.pageY;
+    showPopovers.value = true;
+    const editFolderId = event.target.closest("div[data-folder]").getAttribute("data-folder");
+    desktopStore.assignEditFolder(editFolderId);
+    return;
+  }
   positionXPopovers.value = event.pageX;
   positionYPopovers.value = event.pageY;
+  popoverOptions.rename = false;
+  popoverOptions.create = true;
+  popoverOptions.delete = false;
   showPopovers.value = true;
 };
 
 const closePopovers = (statePopovers) => {
-  console.log(statePopovers);
   showPopovers.value = statePopovers
 }
-
-// disabling the default modal on right click and calling a function on click
-onMounted(() => {
-  document.oncontextmenu = function () {
-    mouseRightClick(event)
-    return false;
-  };
-})
 </script>
 
 <style scoped lang="scss">

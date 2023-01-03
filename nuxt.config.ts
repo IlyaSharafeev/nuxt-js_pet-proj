@@ -27,7 +27,8 @@ export default defineNuxtConfig({
     },
     modules: [
         '@nuxtjs/i18n',
-        'nuxt-icon'
+        'nuxt-icon',
+        '@pinia/nuxt',
     ],
     // i18n: {
     //     locales: ['en', 'ua'],

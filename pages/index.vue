@@ -114,6 +114,9 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { useDraggable } from '@vueuse/core'
+
 definePageMeta({
   layout: 'desktop'
 })
@@ -124,9 +127,6 @@ useHead({
 
 const stickyTextRed = ref("123");
 const stickyTextYellow = ref("456");
-
-import { ref } from 'vue'
-import { useDraggable } from '@vueuse/core'
 
 const gameboy = ref(null);
 const stickyRed = ref(null);
