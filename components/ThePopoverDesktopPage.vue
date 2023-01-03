@@ -17,7 +17,7 @@
         <li class="menu-item" v-if="popoverOptions.create"><button class="menu-button"><Icon name="ep:circle-plus-filled" />Create a folder</button></li>
       </ul>
       <ul class="menu-list" v-if="popoverOptions.delete">
-        <li class="menu-item"><button class="menu-button menu-button--delete"><Icon name="ep:close-bold" />Delete</button></li>
+        <li class="menu-item" @click="remove"><button class="menu-button menu-button--delete"><Icon name="ep:close-bold" />Delete</button></li>
       </ul>
     </div>
   </div>
@@ -30,7 +30,8 @@ import {useDesktopStore} from "../store/desktop";
 
 const emit = defineEmits([
     'close',
-    'editMode'
+    'editMode',
+    'remove',
 ])
 
 const props = defineProps(({
@@ -46,6 +47,11 @@ const target = ref(null);
 const rename = () => {
   desktopStore.onEditMode();
   emit('close', false);
+}
+
+const remove = () => {
+  desktopStore.onRemoveMode();
+  emit('remove', true);
 }
 
 onClickOutside(target, () => emit('close', false));

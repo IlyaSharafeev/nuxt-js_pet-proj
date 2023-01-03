@@ -142,6 +142,6 @@ const finishEditing = (e) => {
 }
 
 .folder_wrapper {
-  position: fixed;
+  position: absolute;
 }
 </style>

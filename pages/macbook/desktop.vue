@@ -77,7 +77,7 @@
         <FoldersDesktop/>
       </div>
 
-      <ThePopoverDesktopPage @close="closePopovers" v-if="showPopovers" :popoverOptions="popoverOptions" :positionX="positionXPopovers" :positionY="positionYPopovers"/>
+      <ThePopoverDesktopPage @close="closePopovers" @remove="mouseRightClick(e, true)" v-if="showPopovers" :popoverOptions="popoverOptions" :positionX="positionXPopovers" :positionY="positionYPopovers"/>
     </div>
   </section>
 </template>
@@ -122,15 +122,21 @@ const popoverOptions = {
   create: true,
 }
 
-const mouseRightClick = (event) => {
-  if(event.target.closest("div[data-folder]")){
+const mouseRightClick = (event, remove) => {
+  if(remove) {
+    desktopStore.removeFolder(desktopStore.editFolder);
+    showPopovers.value = false;
+    return;
+  }
+
+  if(event?.target.closest("div[data-folder]")){
+    const editFolderId = event.target.closest("div[data-folder]").getAttribute("data-folder");
     popoverOptions.rename = true;
     popoverOptions.create = false;
     popoverOptions.delete = true;
     positionXPopovers.value = event.pageX;
     positionYPopovers.value = event.pageY;
     showPopovers.value = true;
-    const editFolderId = event.target.closest("div[data-folder]").getAttribute("data-folder");
     desktopStore.assignEditFolder(editFolderId);
     return;
   }
@@ -170,7 +176,7 @@ const closePopovers = (statePopovers) => {
 }
 
 .folder_wrapper {
-  position: fixed;
+  position: absolute;
 }
 
 .fancybox-active {
