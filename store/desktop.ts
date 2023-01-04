@@ -8,6 +8,10 @@ export const useDesktopStore = defineStore({
       editMode: false,
       removeMode: false,
       editFolder: null,
+      positionPointer: {
+        x: null,
+        y: null,
+      },
       folders: [
         {
           id: 0,
@@ -47,18 +51,24 @@ export const useDesktopStore = defineStore({
       this.offEditMode();
     },
     removeFolder(removeFolder) {
-      console.log(removeFolder);
       this.folders = this.folders.filter((elem) => {
-        console.log(elem.id);
         return elem.id !== +removeFolder;
       })
-      console.log(this.folders);
       this.offRemoveMode();
-    }
+    },
+    createFolder(createFolder) {
+      console.log(createFolder);
+      this.folders.push(createFolder);
+    },
+    setPositionPointer(position) {
+      this.positionPointer.x = position.x;
+      this.positionPointer.y = position.y;
+    },
   },
   getters: {
     foldersList: state => state.folders,
     getEditMode: state => state.editMode,
     getRemoveMode: state => state.removeMode,
+    getPositionPointer: state => state.positionPointer,
   },
 })

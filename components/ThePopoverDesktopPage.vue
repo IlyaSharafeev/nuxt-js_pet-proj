@@ -14,7 +14,7 @@
             <li class="menu-item"><button class="menu-button menu-button--black menu-button--checked"><i data-feather="circle"></i>No status<i data-feather="check"></i></button></li>
           </ul>
         </li>
-        <li class="menu-item" v-if="popoverOptions.create"><button class="menu-button"><Icon name="ep:circle-plus-filled" />Create a folder</button></li>
+        <li class="menu-item" v-if="popoverOptions.create" @click="create"><button class="menu-button"><Icon name="ep:circle-plus-filled" />Create a folder</button></li>
       </ul>
       <ul class="menu-list" v-if="popoverOptions.delete">
         <li class="menu-item" @click="remove"><button class="menu-button menu-button--delete"><Icon name="ep:close-bold" />Delete</button></li>
@@ -51,7 +51,11 @@ const rename = () => {
 
 const remove = () => {
   desktopStore.onRemoveMode();
-  emit('remove', true);
+  emit('remove', 'remove');
+}
+
+const create = () => {
+  emit('create', 'create');
 }
 
 onClickOutside(target, () => emit('close', false));

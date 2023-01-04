@@ -6,7 +6,7 @@
           <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/folder1.png?raw=true"
                alt="folder_icon">
         </div>
-        <div class="folder_name" ref="FolderInput" v-if="desktopStore.editFolder == folder.id && desktopStore.getEditMode">
+        <div class="folder_name" ref="FolderInput" v-if="editNewFolder || +desktopStore.editFolder === +folder.id && desktopStore.getEditMode">
           <input :value="folder.title" @keyup.enter="finishEditing">
         </div>
         <div class="folder_name" v-else>
@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import {defineProps, ref} from "vue";
+import {defineProps, onMounted, ref} from "vue";
 import {useDraggable} from "@vueuse/core/index";
 import {onClickOutside} from '@vueuse/core';
 
@@ -32,8 +32,16 @@ const props = defineProps(({
 const Folder = ref(null);
 const FolderInput = ref(null);
 const desktopStore = useDesktopStore();
+const editNewFolder = ref(false);
+
+onMounted(() => {
+  if(!props.folder.title) {
+    editNewFolder.value = true;
+  }
+})
 
 onClickOutside(FolderInput, () => {
+  editNewFolder.value = false;
   desktopStore.offEditMode()
 })
 
@@ -50,10 +58,15 @@ const finishEditing = (e) => {
     title: e.target.value,
   }
   desktopStore.changeFolderName(editableFolder);
+  editNewFolder.value = false;
 }
 </script>
 
 <style scoped lang="scss">
+input {
+  width: 100%;
+}
+
 .btn_folder {
   background-color: transparent;
   border: none;
@@ -131,10 +144,8 @@ const finishEditing = (e) => {
     margin-top: 0;
     max-width: 100px;
     border-radius: 3px;
-    padding: 5px;
-    padding-top: 0;
-    padding-right: 0;
-    padding-left: 0;
+    padding: 5px 0 5px;
+    word-break: break-all;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     text-align: center;
