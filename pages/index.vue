@@ -20,7 +20,7 @@
           </div>
         </NuxtLink>
       </div>
-    <NuxtLink to="macbook/desktop">
+    <NuxtLink to="macbook/login-page">
       <div class="computer-container">
         <div class="screen">
           <div class="logo-container">
