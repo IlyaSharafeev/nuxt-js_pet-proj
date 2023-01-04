@@ -77,7 +77,7 @@
         <FoldersDesktop/>
       </div>
 
-      <ThePopoverDesktopPage @close="closePopovers" @remove="mouseRightClick(e, 'remove')" @create="mouseRightClick(e, 'create')" v-if="showPopovers" :popoverOptions="popoverOptions" :positionX="positionXPopovers" :positionY="positionYPopovers"/>
+      <ThePopoverDesktopPage @close="closePopovers" @copy="mouseRightClick(e, 'copy')" @remove="mouseRightClick(e, 'remove')" @create="mouseRightClick(e, 'create')" v-if="showPopovers" :popoverOptions="popoverOptions" :positionX="positionXPopovers" :positionY="positionYPopovers"/>
     </div>
   </section>
 </template>
@@ -156,9 +156,25 @@ const mouseRightClick = (event, option) => {
     return;
   }
 
+  if(option === 'copy') {
+    const randomId = getRandomInt();
+    const insertFolder = {
+      id: randomId,
+      title: desktopStore.copyFolder.title,
+      defaultPositionX: desktopStore.getPositionPointer.x,
+      defaultPositionY: desktopStore.getPositionPointer.y,
+    }
+    desktopStore.insertFolder(insertFolder);
+    closePopovers();
+    return;
+  }
+
   //If you click on a folder
   if(event?.target.closest("div[data-folder]")){
     const editFolderId = event.target.closest("div[data-folder]").getAttribute("data-folder");
+
+    desktopStore.setCopyFolder(editFolderId);
+
     popoverOptions.rename = true;
     popoverOptions.create = false;
     popoverOptions.delete = true;

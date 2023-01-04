@@ -16,6 +16,9 @@
       <ul class="menu-list" v-if="popoverOptions.rename">
         <li class="menu-item" @click="rename"><button class="menu-button"><Icon name="ep:edit-pen" />Rename</button></li>
       </ul>
+      <ul class="menu-list" v-if="popoverOptions.rename">
+        <li class="menu-item" @click="copy"><button class="menu-button"><Icon name="bxs:add-to-queue" />Copy</button></li>
+      </ul>
       <ul class="menu-list" v-if="popoverOptions.delete">
         <li class="menu-item" @click="remove"><button class="menu-button menu-button--delete"><Icon name="ep:close-bold" />Delete</button></li>
       </ul>
@@ -30,8 +33,9 @@ import {useDesktopStore} from "../store/desktop";
 
 const emit = defineEmits([
     'close',
-    'editMode',
     'remove',
+    'copy',
+    'editMode',
 ])
 
 const props = defineProps(({
@@ -56,6 +60,10 @@ const remove = () => {
 
 const create = () => {
   emit('create', 'create');
+}
+
+const copy = () => {
+  emit('copy', 'copy');
 }
 
 onClickOutside(target, () => emit('close'));

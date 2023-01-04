@@ -30,3 +30,11 @@ lang/en.js,4\d\4d32fe30a05e50b53d55d0d9bbc0b188f3ff781a
 :
 
 lang/ua.js,5\a\5ae13be01940da1dd833c8b257849adecfd2ecfa
+w
+G.idea/sonarlint/issuestore/4/d/4d32fe30a05e50b53d55d0d9bbc0b188f3ff781a,b\8\b84729f702542b89f7200e899c70ed4b79a0ec7e
+w
+G.idea/sonarlint/issuestore/a/6/a65934e5a53e8d81d4585e7df894813f5ea21bb2,8\1\8120d7d7e9b60553a414a2a78c1097ed4f6749ae
+w
+G.idea/sonarlint/issuestore/5/a/5ae13be01940da1dd833c8b257849adecfd2ecfa,0\9\0954018989da5fb4a57c21360df8bfaa3b62c678
+A
+package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
