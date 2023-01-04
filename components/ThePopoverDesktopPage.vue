@@ -2,19 +2,19 @@
   <div class="container">
     <!-- code here -->
     <div class="menu" ref="target" :style="{'top': props.positionY + 'px', 'left': props.positionX + 'px'}">
+      <ul class="menu-list" v-if="popoverOptions.create">
+<!--        <li class="menu-item"><button class="menu-button menu-button&#45;&#45;black"><i data-feather="circle"></i>No status<i data-feather="chevron-right"></i></button>-->
+<!--          <ul class="menu-sub-list">-->
+<!--            <li class="menu-item"><button class="menu-button menu-button&#45;&#45;orange"><i data-feather="square"></i>Needs review</button></li>-->
+<!--            <li class="menu-item"><button class="menu-button menu-button&#45;&#45;purple"><i data-feather="octagon"></i>In progress</button></li>-->
+<!--            <li class="menu-item"><button class="menu-button menu-button&#45;&#45;green"><i data-feather="triangle"></i>Approved</button></li>-->
+<!--            <li class="menu-item"><button class="menu-button menu-button&#45;&#45;black menu-button&#45;&#45;checked"><i data-feather="circle"></i>No status<i data-feather="check"></i></button></li>-->
+<!--          </ul>-->
+<!--        </li>-->
+        <li class="menu-item" @click="create"><button class="menu-button"><Icon name="ep:circle-plus-filled" />Create a folder</button></li>
+      </ul>
       <ul class="menu-list" v-if="popoverOptions.rename">
         <li class="menu-item" @click="rename"><button class="menu-button"><Icon name="ep:edit-pen" />Rename</button></li>
-      </ul>
-      <ul class="menu-list">
-        <li class="menu-item"><button class="menu-button menu-button--black"><i data-feather="circle"></i>No status<i data-feather="chevron-right"></i></button>
-          <ul class="menu-sub-list">
-            <li class="menu-item"><button class="menu-button menu-button--orange"><i data-feather="square"></i>Needs review</button></li>
-            <li class="menu-item"><button class="menu-button menu-button--purple"><i data-feather="octagon"></i>In progress</button></li>
-            <li class="menu-item"><button class="menu-button menu-button--green"><i data-feather="triangle"></i>Approved</button></li>
-            <li class="menu-item"><button class="menu-button menu-button--black menu-button--checked"><i data-feather="circle"></i>No status<i data-feather="check"></i></button></li>
-          </ul>
-        </li>
-        <li class="menu-item" v-if="popoverOptions.create" @click="create"><button class="menu-button"><Icon name="ep:circle-plus-filled" />Create a folder</button></li>
       </ul>
       <ul class="menu-list" v-if="popoverOptions.delete">
         <li class="menu-item" @click="remove"><button class="menu-button menu-button--delete"><Icon name="ep:close-bold" />Delete</button></li>
@@ -58,7 +58,7 @@ const create = () => {
   emit('create', 'create');
 }
 
-onClickOutside(target, () => emit('close', false));
+onClickOutside(target, () => emit('close'));
 </script>
 
 <style scoped lang="scss">

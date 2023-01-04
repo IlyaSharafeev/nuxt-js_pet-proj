@@ -119,13 +119,16 @@ const positionXPopovers = ref();
 const positionYPopovers = ref();
 const popoverOptions = {};
 
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
+const getRandomInt = (min = 0, max = 9999) => {
+  const number = Math.floor(min + Math.random() * (max - min))
+  if (desktopStore.foldersList.some(obj => obj.id === number)) return getRandomInt(min, max)
+  else {
+    return number
+  }
 };
 
 const mouseRightClick = (event, option) => {
+  //fix cursor click globally
   if(event) {
     const position = {
       x: event.pageX,
@@ -135,23 +138,25 @@ const mouseRightClick = (event, option) => {
   }
 
   if(option === 'create') {
+    const randomId = getRandomInt();
     const newFolder = {
-      id: getRandomInt(3, 999),
+      id: randomId,
       title: '',
       defaultPositionX: desktopStore.getPositionPointer.x,
       defaultPositionY: desktopStore.getPositionPointer.y,
     }
     desktopStore.createFolder(newFolder);
-    showPopovers.value = false;
+    closePopovers();
     return;
   }
 
   if(option === 'remove') {
     desktopStore.removeFolder(desktopStore.editFolder);
-    showPopovers.value = false;
+    closePopovers();
     return;
   }
 
+  //If you click on a folder
   if(event?.target.closest("div[data-folder]")){
     const editFolderId = event.target.closest("div[data-folder]").getAttribute("data-folder");
     popoverOptions.rename = true;
@@ -163,6 +168,7 @@ const mouseRightClick = (event, option) => {
     desktopStore.assignEditFolder(editFolderId);
     return;
   }
+  //If you didn't click on the folder
   positionXPopovers.value = event.pageX;
   positionYPopovers.value = event.pageY;
   popoverOptions.rename = false;
@@ -171,8 +177,8 @@ const mouseRightClick = (event, option) => {
   showPopovers.value = true;
 };
 
-const closePopovers = (statePopovers) => {
-  showPopovers.value = statePopovers
+const closePopovers = () => {
+  showPopovers.value = false;
 }
 </script>
 
