@@ -12,22 +12,22 @@
         </div>
         <div class="menu_topbar_right">
           <div class="lang">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img v-if="$i18n.getLocaleCookie() === 'ua'" src="@/assets/images/english-flag.png" alt="ukraine-flag">
-                <img v-if="$i18n.getLocaleCookie() === 'en'" src="@/assets/images/ukraine-flag.jpg" alt="english-flag">
-              </button>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'ua'" href="#" @click.prevent.stop="$i18n.setLocale('en')">
-                    <img src="@/assets/images/ukraine-flag.jpg"/>
-                    {{$t('lang')}}
-                  </a>
-                  <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'en'" href="#" @click.prevent.stop="$i18n.setLocale('ua')">
-                    <img src="@/assets/images/english-flag.png"/>
-                    {{$t('lang')}}
-                  </a>
-                </li>
-              </ul>
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img v-if="$i18n.getLocaleCookie() === 'ua'" src="@/assets/images/english-flag.png" alt="ukraine-flag">
+              <img v-if="$i18n.getLocaleCookie() === 'en'" src="@/assets/images/ukraine-flag.jpg" alt="english-flag">
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'ua'" href="#" @click.prevent.stop="$i18n.setLocale('en')">
+                  <img src="@/assets/images/ukraine-flag.jpg"/>
+                  {{$t('lang')}}
+                </a>
+                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'en'" href="#" @click.prevent.stop="$i18n.setLocale('ua')">
+                  <img src="@/assets/images/english-flag.png"/>
+                  {{$t('lang')}}
+                </a>
+              </li>
+            </ul>
           </div>
           <div class="battery">
             <span>{{getBatteryLevel()}}%</span>
@@ -40,7 +40,7 @@
             <span id="time"></span>
           </div>
           <div class="namebook">
-            Galeev Albert
+            Ilya Sharafeev
           </div>
           <div class="search">
             <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
@@ -102,6 +102,11 @@ onMounted(() => {
     mouseRightClick(event)
     return false;
   };
+  desktopStore.setUser('ilya');
+})
+
+definePageMeta({
+  middleware: ["desktop-auth"]
 })
 
 const getBatteryLevel = () => {
