@@ -1,19 +1,19 @@
 <template>
   <div>
-    <h1>Step by step form</h1>
-    <h2>Just practising Javascript</h2>
+    <h1>Sign up</h1>
+    <h2>and go to desktop</h2>
     <form>
       <ul class="items">
-        <li @click="activeList = 1" :class="{'active': activeList === 1}"></li>
-        <li @click="activeList = 2" :class="{'active': activeList === 2}"></li>
-        <li @click="activeList = 3" :class="{'active': activeList === 3}"></li>
-        <li @click="activeList = 4" :class="{'active': activeList === 4}"></li>
+        <li :class="{'active': activeList === 1}"></li>
+        <li :class="{'active': activeList === 2}"></li>
+        <li :class="{'active': activeList === 3}"></li>
+        <li :class="{'active': activeList === 4}"></li>
       </ul>
       <fieldset class="username" v-if="activeList === 1" :class="{'enable': activeList === 1}">
         <div class="icon left"><em class="user"></em></div>
         <input type="text" name="username" placeholder="Username" v-model="v$.name.$model"/>
         <div class="icon right button"><em class="arrow"></em></div>
-        <p v-if="v$.name.$error">{{v$.name.$errors[0].$message}}</p>
+        <p v-if="v$.name.$error" class="error">{{v$.name.$errors[0].$message}}</p>
       </fieldset>
       <fieldset class="mail" v-if="activeList === 2" :class="{'enable': activeList === 2}">
         <div class="icon left"><em class="letter"></em></div>
@@ -27,9 +27,9 @@
         <div class="icon right button"><em class="arrow"></em></div>
         <p v-if="v$.password.$error">{{v$.password.$errors[0].$message}}</p>
       </fieldset>
-      <fieldset class="thanks" v-if="activeList === 4" :class="{'enable': activeList === 4}">
+      <fieldset class="thanks" v-if="activeList === 4" :class="{'enable': activeList === 4}" @click="login">
         <div class="icon left"><em class="heart"></em></div>
-        <p>Thanks for your time</p>
+        <p>go to desktop</p>
         <div class="icon right"><em class="heart"></em></div>
       </fieldset>
     </form>
@@ -40,6 +40,8 @@
 import {onMounted, reactive, ref} from "vue";
 import { useVuelidate } from '@vuelidate/core';
 import {required, email, minLength, maxLength} from '@vuelidate/validators';
+import {useRouter} from "nuxt/app";
+import {useDesktopStore} from "../../store/desktop";
 
 const registerForm = reactive({
   name: '',
@@ -54,6 +56,10 @@ const rules = {
 }
 
 const v$ = useVuelidate(rules, registerForm);
+
+const desktopStore = useDesktopStore();
+
+const router = useRouter();
 
 const activeList = ref(1);
 
@@ -72,7 +78,24 @@ function next(target) {
 function keyDown(event) {
   let key = event.keyCode,
       target = document.querySelector('fieldset.enable .button');
-  if (key === 13 || key === 9) next(target);
+  if(activeList.value === 1 && v$.value.name.$error) {
+    activeList.value = 1;
+    return;
+  }
+
+  if(activeList.value === 2 && v$.value.email.$error) {
+    activeList.value = 2;
+    return;
+  }
+
+  if(activeList.value === 3 && v$.value.password.$error) {
+    activeList.value = 3;
+    return;
+  }
+
+  if (key === 13 || key === 9) {
+    next(target);
+  }
 }
 
 onMounted(() => {
@@ -82,6 +105,11 @@ document.body.onmouseup = function (event) {
 };
 document.addEventListener("keydown", keyDown, false);
 })
+
+const login = () => {
+  router.push('/macbook/desktop');
+  desktopStore.setAuthName(registerForm.name);
+};
 </script>
 
 <style lang="sass">
@@ -304,4 +332,8 @@ body.error fieldset
     left: -6px
   &::after
     top: -6px
+
+.error
+  color: red
+  font-weight: bold
 </style>

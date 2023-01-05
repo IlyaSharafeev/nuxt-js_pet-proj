@@ -5,6 +5,9 @@ export const useDesktopStore = defineStore({
   id: 'desktop-store',
   state: () => {
     return {
+      auth: {
+        name: null,
+      },
       editMode: false,
       removeMode: false,
       editFolder: null,
@@ -30,6 +33,9 @@ export const useDesktopStore = defineStore({
     }
   },
   actions: {
+    setAuthName(name) {
+      this.auth.name = name;
+    },
     assignEditFolder(folderId) {
       this.editFolder = folderId;
     },

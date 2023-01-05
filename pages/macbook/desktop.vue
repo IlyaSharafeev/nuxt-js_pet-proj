@@ -40,7 +40,7 @@
             <span id="time"></span>
           </div>
           <div class="namebook">
-            Ilya Sharafeev
+            {{desktopStore.auth.name}}
           </div>
           <div class="search">
             <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
