@@ -10,31 +10,50 @@
         <li @click="activeList = 4" :class="{'active': activeList === 4}"></li>
       </ul>
       <fieldset class="username" v-if="activeList === 1" :class="{'enable': activeList === 1}">
-        <div class="icon left"><i class="user"></i></div>
-        <input type="text" name="username" placeholder="Username"/>
-        <div class="icon right button"><i class="arrow"></i></div>
+        <div class="icon left"><em class="user"></em></div>
+        <input type="text" name="username" placeholder="Username" v-model="v$.name.$model"/>
+        <div class="icon right button"><em class="arrow"></em></div>
+        <p v-if="v$.name.$error">{{v$.name.$errors[0].$message}}</p>
       </fieldset>
-      <fieldset class="email" v-if="activeList === 2" :class="{'enable': activeList === 2}">
-        <div class="icon left"><i class="letter"></i></div>
-        <input type="mail" name="email" placeholder="Email"/>
-        <div class="icon right button"><i class="arrow"></i></div>
+      <fieldset class="mail" v-if="activeList === 2" :class="{'enable': activeList === 2}">
+        <div class="icon left"><em class="letter"></em></div>
+        <input type="email" name="email" placeholder="Email" v-model.trim="v$.email.$model"/>
+        <div class="icon right button"><em class="arrow"></em></div>
+        <p v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</p>
       </fieldset>
       <fieldset class="password" v-if="activeList === 3" :class="{'enable': activeList === 3}">
-        <div class="icon left"><i class="lock"></i></div>
-        <input type="password" name="password" placeholder="Password"/>
-        <div class="icon right button"><i class="arrow"></i></div>
+        <div class="icon left"><em class="lock"></em></div>
+        <input type="password" name="password" placeholder="Password" v-model.trim="v$.password.$model"/>
+        <div class="icon right button"><em class="arrow"></em></div>
+        <p v-if="v$.password.$error">{{v$.password.$errors[0].$message}}</p>
       </fieldset>
       <fieldset class="thanks" v-if="activeList === 4" :class="{'enable': activeList === 4}">
-        <div class="icon left"><i class="heart"></i></div>
+        <div class="icon left"><em class="heart"></em></div>
         <p>Thanks for your time</p>
-        <div class="icon right"><i class="heart"></i></div>
+        <div class="icon right"><em class="heart"></em></div>
       </fieldset>
     </form>
   </div>
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
+import { useVuelidate } from '@vuelidate/core';
+import {required, email, minLength, maxLength} from '@vuelidate/validators';
+
+const registerForm = reactive({
+  name: '',
+  email: '',
+  password: '',
+})
+
+const rules = {
+  name: { required, min: minLength(2), max: maxLength(24) },
+  email: { required, email },
+  password: { required, min: minLength(6), max: maxLength(24) },
+}
+
+const v$ = useVuelidate(rules, registerForm);
 
 const activeList = ref(1);
 
@@ -46,12 +65,6 @@ function next(target) {
     window.document.body.classList.add('error');
   } else {
     window.document.body.classList.remove('error');
-
-    // Switch active class on left list
-    let active = document.querySelector('ul.items li.active'),
-        nextActive = active.nextElementSibling;
-    active.classList.remove('active');
-    nextActive.classList.add('active');
     activeList.value++;
   }
 }
@@ -154,7 +167,7 @@ form
       height: 30px
       top: 15px
       transition: all 0.4s ease
-      i
+      em
         position: absolute
         display: block
         &::before, &::after

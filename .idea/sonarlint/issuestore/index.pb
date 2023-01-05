@@ -36,16 +36,12 @@ w
 G.idea/sonarlint/issuestore/a/6/a65934e5a53e8d81d4585e7df894813f5ea21bb2,8\1\8120d7d7e9b60553a414a2a78c1097ed4f6749ae
 w
 G.idea/sonarlint/issuestore/5/a/5ae13be01940da1dd833c8b257849adecfd2ecfa,0\9\0954018989da5fb4a57c21360df8bfaa3b62c678
-A
-package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
 >
 nuxt.config.ts,e\4\e44500e8e3ef8f6dba8f3d3501f7d772d94a973c
 L
 components/FolderDesktop.vue,3\c\3c89128adac8eed4ea2f891536803df2f4959516
 M
 components/FoldersDesktop.vue,7\a\7a00624e7e70a416226d03057c4b387364c40939
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 w
 G.idea/sonarlint/issuestore/f/a/fa288d1472d29beccb489a676f68739ad365fc47,c\d\cdb55fb7b9550cf1c93c03e68dfe3882647e90dc
 w
