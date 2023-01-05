@@ -19,13 +19,13 @@
         <div class="icon left"><em class="letter"></em></div>
         <input type="email" name="email" placeholder="Email" v-model.trim="v$.email.$model"/>
         <div class="icon right button"><em class="arrow"></em></div>
-        <p v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</p>
+        <p v-if="v$.email.$error" class="error">{{v$.email.$errors[0].$message}}</p>
       </fieldset>
       <fieldset class="password" v-if="activeList === 3" :class="{'enable': activeList === 3}">
         <div class="icon left"><em class="lock"></em></div>
         <input type="password" name="password" placeholder="Password" v-model.trim="v$.password.$model"/>
         <div class="icon right button"><em class="arrow"></em></div>
-        <p v-if="v$.password.$error">{{v$.password.$errors[0].$message}}</p>
+        <p v-if="v$.password.$error" class="error">{{v$.password.$errors[0].$message}}</p>
       </fieldset>
       <fieldset class="thanks" v-if="activeList === 4" :class="{'enable': activeList === 4}" @click="login">
         <div class="icon left"><em class="heart"></em></div>
