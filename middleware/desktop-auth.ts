@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-    if(process.client) {
+    if (process.client) {
         if (!localStorage.getItem('token') && to.path === '/macbook/desktop') {
             return abortNavigation();
         }

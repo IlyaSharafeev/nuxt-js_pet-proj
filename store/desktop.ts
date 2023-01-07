@@ -36,9 +36,6 @@ export const useDesktopStore = defineStore({
     setAuthName(name) {
       this.auth.name = name;
     },
-    setBackgroundDesktop(backgroundUrl) {
-      this.background = backgroundUrl;
-    },
     assignEditFolder(folderId) {
       this.editFolder = folderId;
     },

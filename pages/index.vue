@@ -1,33 +1,26 @@
 <template>
-  <div id="desk">
-      <div id="sticky-notes">
-        <div>
-          <div class="sticky-note-red" ref="stickyRed" :style="stickyRedStyle">
-            <div class="sticky-text">
-              {{stickyTextRed}}
-            </div>
-            <div class="bottom-strip-1">
-            </div>
+  <div>
+    <div class="sticky-note-red" ref="stickyRed" :style="stickyRedStyle">
+          <div class="sticky-text">
+            {{ stickyTextRed }}
+          </div>
+          <div class="bottom-strip-1">
           </div>
         </div>
-        <div>
-          <div class="sticky-note-yellow" ref="stickyYellow" :style="stickyYellowStyle">
-            <div class="sticky-text">
-              {{stickyTextYellow}}
-            </div>
-            <div class="bottom-strip-2">
-            </div>
+    <div class="sticky-note-yellow" ref="stickyYellow" :style="stickyYellowStyle">
+          <div class="sticky-text">
+            {{ stickyTextYellow }}
+          </div>
+          <div class="bottom-strip-2">
           </div>
         </div>
-      </div>
-    <NuxtLink to="macbook/login-page">
-      <div class="computer-container">
-        <div class="screen">
-          <div class="logo-container" />
+    <NuxtLink to="/macbook/login-page" class="computer-container">
+      <div class="screen">
+          <div class="logo-container"/>
         </div>
-        <div class="bottom-computer">
+      <div class="bottom-computer">
           <div class="keyboard-container">
-            <div id = "keyboard-row-1">
+            <div id="keyboard-row-1">
               <div class="top-bar-1">
               </div>
               <div class="top-bar-2">
@@ -45,7 +38,7 @@
               <div class="top-bar-8">
               </div>
             </div>
-            <div id = "keyboard-row-2">
+            <div id="keyboard-row-2">
               <div class="mid-bar-1">
               </div>
               <div class="mid-bar-2">
@@ -64,7 +57,7 @@
               </div>
             </div>
 
-            <div id = "keyboard-row-3">
+            <div id="keyboard-row-3">
               <div class="bottom-bar-1">
               </div>
               <div class="bottom-bar-2">
@@ -85,38 +78,35 @@
           </div>
           <div class="trackpad"></div>
         </div>
-      </div>
     </NuxtLink>
-      <div class="pen" ref="pen" :style="penStyle">
-        <div class="cap"></div>
-        <div class="end"></div>
+    <div class="pen" ref="pen" :style="penStyle">
+      <div class="cap"></div>
+      <div class="end"></div>
+    </div>
+    <div class="mouse" ref="mouse" :style="mouseStyle">
+      <div class="tracker"></div>
+    </div>
+    <div class="gameboy" ref="gameboy" :style="gamebodyStyle">
+      <div class="gameboy-screen-back">
+        <div class="gameboy-screen-front"></div>
       </div>
-      <div class="mouse" ref="mouse" :style="mouseStyle">
-        <div class="tracker"></div>
+      <div class="dpad-container">
+        <div class="horizontal-dpad"></div>
+        <div class="vertical-dpad"></div>
       </div>
-      <div class="gameboy" ref="gameboy" :style="gamebodyStyle">
-        <div class="gameboy-screen-back">
-          <div class="gameboy-screen-front"></div>
-        </div>
-        <div class="dpad-container">
-          <div class="horizontal-dpad"></div>
-          <div class="vertical-dpad"></div>
-        </div>
-        <div class="button-1"></div>
-        <div class="button-2"></div>
-        <div class="start"></div>
-        <div class="select"></div>
-      </div>
-    <img :src="qrcode" alt="QR Code" class="qrcode" />
+      <div class="button-1"></div>
+      <div class="button-2"></div>
+      <div class="start"></div>
+      <div class="select"></div>
+    </div>
+    <img class="qrcode" :src="qrcodeHref" alt="QR Code"/>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useDraggable } from '@vueuse/core'
-import { useQRCode } from '@vueuse/integrations/useQRCode'
-
-const qrcode = useQRCode('https://www.instagram.com/ilya__sharafeev/');
+import {ref} from 'vue'
+import {useDraggable} from '@vueuse/core'
+import {useQRCode} from '@vueuse/integrations/useQRCode'
 
 definePageMeta({
   layout: 'desktop'
@@ -125,6 +115,8 @@ definePageMeta({
 useHead({
   titleTemplate: '%s',
 })
+
+const qrcodeHref = useQRCode('https://www.instagram.com/ilya__sharafeev/');
 
 const stickyTextRed = ref(null);
 const stickyTextYellow = ref(null);
@@ -135,30 +127,29 @@ const stickyYellow = ref(null);
 const pen = ref(null);
 const mouse = ref(null);
 
-// `style` will be a helper computed for `left: ?px; top: ?px;`
 const gamebodyStyle = useDraggable(gameboy, {
-  initialValue: { x: 500, y: 700 },
+  initialValue: {x: 500, y: 700},
 }).style;
 
 const stickyRedStyle = useDraggable(stickyRed, {
-  initialValue: { x: 100, y: 150 },
+  initialValue: {x: 100, y: 150},
 }).style;
 
 const stickyYellowStyle = useDraggable(stickyYellow, {
-  initialValue: { x: 50, y: 100 },
+  initialValue: {x: 50, y: 100},
 }).style;
 
 const penStyle = useDraggable(pen, {
-  initialValue: { x: 200, y: 300 },
+  initialValue: {x: 200, y: 300},
 }).style;
 
 const mouseStyle = useDraggable(mouse, {
-  initialValue: { x: 250, y: 500 },
+  initialValue: {x: 250, y: 500},
 }).style;
 </script>
 
 <style scoped lang="scss">
-body{
+body {
   background: #EBF3FE;
 }
 
@@ -171,7 +162,7 @@ body{
   z-index: 2;
 }
 
-.computer-container{
+.computer-container {
   position: absolute;
   top: 50%;
   transform: translate(50%, -50%);
@@ -182,7 +173,7 @@ body{
   z-index: 1;
 }
 
-.computer-container-large{
+.computer-container-large {
   position: absolute;
   height: 70%;
   width: 50%;
@@ -192,7 +183,7 @@ body{
   z-index: 1;
 }
 
-.screen{
+.screen {
   position: absolute;
   width: 90%;
   height: 40%;
@@ -201,7 +192,7 @@ body{
   left: 5%;
 }
 
-.progress-bar{
+.progress-bar {
   position: absolute;
   height: 5%;
   bottom: 12%;
@@ -211,13 +202,15 @@ body{
   border-radius: 50px;
   border: solid 2px white;
 }
-.progress-fill{
+
+.progress-fill {
   position: absolute;
   width: 100%;
   height: 100%;
   background: white;
 }
-.logo-container{
+
+.logo-container {
   position: absolute;
   height: 40%;
   width: 20%;
@@ -225,18 +218,20 @@ body{
   left: 40%;
   background: none;
 }
-.game-container{
+
+.game-container {
   position: absolute;
   height: 100%;
   width: 120%;
   left: -10%;
   background: none;
 }
-.screen-logo{
+
+.screen-logo {
   height: 100%;
 }
 
-.keyboard-container{
+.keyboard-container {
   position: absolute;
   width: 90%;
   height: 50%;
@@ -246,7 +241,7 @@ body{
   z-index: 3;
 }
 
-.top-bar-1{
+.top-bar-1 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -256,7 +251,7 @@ body{
   z-index: 4;
 }
 
-.top-bar-2{
+.top-bar-2 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -266,7 +261,7 @@ body{
   z-index: 4;
 }
 
-.top-bar-3{
+.top-bar-3 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -276,7 +271,7 @@ body{
   z-index: 4;
 }
 
-.top-bar-4{
+.top-bar-4 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -286,7 +281,7 @@ body{
   z-index: 4;
 }
 
-.top-bar-5{
+.top-bar-5 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -296,7 +291,7 @@ body{
   z-index: 4;
 }
 
-.top-bar-6{
+.top-bar-6 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -306,7 +301,7 @@ body{
   z-index: 4;
 }
 
-.top-bar-7{
+.top-bar-7 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -316,7 +311,7 @@ body{
   z-index: 4;
 }
 
-.top-bar-8{
+.top-bar-8 {
   cursor: pointer;
   position: absolute;
   width: 8%;
@@ -327,7 +322,7 @@ body{
   z-index: 4;
 }
 
-.mid-bar-1{
+.mid-bar-1 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -337,7 +332,7 @@ body{
   z-index: 4;
 }
 
-.mid-bar-2{
+.mid-bar-2 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -347,7 +342,7 @@ body{
   z-index: 4;
 }
 
-.mid-bar-3{
+.mid-bar-3 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -357,7 +352,7 @@ body{
   z-index: 4;
 }
 
-.mid-bar-4{
+.mid-bar-4 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -367,7 +362,7 @@ body{
   z-index: 4;
 }
 
-.mid-bar-5{
+.mid-bar-5 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -377,7 +372,7 @@ body{
   z-index: 4;
 }
 
-.mid-bar-6{
+.mid-bar-6 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -387,7 +382,7 @@ body{
   z-index: 4;
 }
 
-.mid-bar-7{
+.mid-bar-7 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -397,7 +392,7 @@ body{
   z-index: 4;
 }
 
-.mid-bar-8{
+.mid-bar-8 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -407,7 +402,7 @@ body{
   z-index: 4;
 }
 
-.bottom-bar-1{
+.bottom-bar-1 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -417,7 +412,7 @@ body{
   z-index: 4;
 }
 
-.bottom-bar-2{
+.bottom-bar-2 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -427,7 +422,7 @@ body{
   z-index: 4;
 }
 
-.bottom-bar-3{
+.bottom-bar-3 {
   position: absolute;
   width: 40%;
   height: 15%;
@@ -437,7 +432,7 @@ body{
   z-index: 4;
 }
 
-.bottom-bar-4{
+.bottom-bar-4 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -447,7 +442,7 @@ body{
   z-index: 4;
 }
 
-.bottom-bar-5{
+.bottom-bar-5 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -457,7 +452,7 @@ body{
   z-index: 4;
 }
 
-.bottom-bar-6{
+.bottom-bar-6 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -467,7 +462,7 @@ body{
   z-index: 4;
 }
 
-.bottom-bar-7{
+.bottom-bar-7 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -477,7 +472,7 @@ body{
   z-index: 4;
 }
 
-.bottom-bar-8{
+.bottom-bar-8 {
   position: absolute;
   width: 8%;
   height: 15%;
@@ -487,7 +482,7 @@ body{
   z-index: 4;
 }
 
-.trackpad{
+.trackpad {
   position: absolute;
   width: 30%;
   left: 35%;
@@ -497,7 +492,7 @@ body{
   z-index: 3;
 }
 
-.bottom-computer{
+.bottom-computer {
   position: absolute;
   height: 47.5%;
   width: 100%;
@@ -506,7 +501,7 @@ body{
   z-index: 2;
 }
 
-.sticky-note-red{
+.sticky-note-red {
   position: absolute;
   background: #F1536A;
   width: 72px;
@@ -517,7 +512,7 @@ body{
   cursor: pointer;
 }
 
-.sticky-note-yellow{
+.sticky-note-yellow {
   position: absolute;
   background: #FEE789;
   width: 72px;
@@ -528,7 +523,7 @@ body{
   cursor: pointer;
 }
 
-.bottom-strip-1{
+.bottom-strip-1 {
   position: absolute;
   bottom: 0%;
   height: 15%;
@@ -536,7 +531,7 @@ body{
   background: #C7485C;
 }
 
-.bottom-strip-2{
+.bottom-strip-2 {
   position: absolute;
   bottom: 0%;
   height: 15%;
@@ -544,7 +539,7 @@ body{
   background: #E7D181;
 }
 
-.clock{
+.clock {
   position: absolute;
   height: 20%;
   width: 15%;
@@ -555,7 +550,7 @@ body{
   z-index: 4;
 }
 
-.clock-white{
+.clock-white {
   position: absolute;
   height: 80%;
   width: 80%;
@@ -566,7 +561,7 @@ body{
   z-index: 5;
 }
 
-.tick{
+.tick {
   position: absolute;
   background: #11141E;
   height: 30%;
@@ -574,7 +569,8 @@ body{
   top: 25%;
   left: 45%;
 }
-.tock{
+
+.tock {
   position: absolute;
   background: #11141E;
   width: 30%;
@@ -583,7 +579,7 @@ body{
   left: 20%;
 }
 
-.mouse{
+.mouse {
   position: absolute;
   background: white;
   width: 50px;
@@ -596,7 +592,7 @@ body{
 }
 
 
-.mouse-large{
+.mouse-large {
   position: absolute;
   background: white;
   height: 30%;
@@ -607,7 +603,7 @@ body{
   border-radius: 15px;
 }
 
-.tracker{
+.tracker {
   position: absolute;
   background: #666666;
   height: 25%;
@@ -616,7 +612,7 @@ body{
   left: 45%;
 }
 
-.pen{
+.pen {
   position: absolute;
   width: 13px;
   height: 95px;
@@ -627,7 +623,7 @@ body{
   cursor: pointer;
 }
 
-.cap{
+.cap {
   position: absolute;
   width: 100%;
   height: 10%;
@@ -635,7 +631,7 @@ body{
   top: -10%;
 }
 
-.end{
+.end {
   position: absolute;
   width: 100%;
   height: 10%;
@@ -645,7 +641,7 @@ body{
   clip-path: polygon(100% 0, 0 0, 50% 100%);
 }
 
-.gameboy{
+.gameboy {
   position: absolute;
   top: 30%;
   right: 5%;
@@ -657,7 +653,7 @@ body{
   cursor: pointer;
 }
 
-.gameboy-screen-back{
+.gameboy-screen-back {
   position: absolute;
   height: 40%;
   width: 75%;
@@ -666,7 +662,7 @@ body{
   background: #402750;
 }
 
-.gameboy-screen-front{
+.gameboy-screen-front {
   position: absolute;
   height: 75%;
   width: 75%;
@@ -675,7 +671,7 @@ body{
   background: #f4fff8;
 }
 
-.gameboy-dot{
+.gameboy-dot {
   position: absolute;
   height: 5%;
   width: 5%;
@@ -685,7 +681,7 @@ body{
   border-radius: 50%;
 }
 
-.dpad-container{
+.dpad-container {
   position: absolute;
   background: none;
   bottom: 20%;
@@ -694,14 +690,15 @@ body{
   left: 12.5%;
 }
 
-.horizontal-dpad{
+.horizontal-dpad {
   position: absolute;
   background: #402750;
   width: 100%;
   height: 30%;
   top: 35%;
 }
-.vertical-dpad{
+
+.vertical-dpad {
   position: absolute;
   background: #402750;
   height: 100%;
@@ -710,7 +707,7 @@ body{
   top: 0%;
 }
 
-.button-1{
+.button-1 {
   cursor: pointer;
   position: absolute;
   width: 15%;
@@ -722,7 +719,7 @@ body{
 }
 
 
-.button-2{
+.button-2 {
   cursor: pointer;
   position: absolute;
   width: 15%;
@@ -733,7 +730,7 @@ body{
   border-radius: 50%;
 }
 
-.start{
+.start {
   cursor: pointer;
   position: absolute;
   border-radius: 40px;
@@ -744,7 +741,7 @@ body{
   width: 18%;
 }
 
-.select{
+.select {
   cursor: pointer;
   position: absolute;
   border-radius: 40px;
@@ -755,7 +752,7 @@ body{
   width: 18%;
 }
 
-.gameboy-large{
+.gameboy-large {
   position: absolute;
   top: 15%;
   right: 35%;
@@ -767,7 +764,7 @@ body{
   background: #8849bc;
 }
 
-.sticky-text{
+.sticky-text {
   position: relative;
   text-align: center;
   margin-top: 25%;
@@ -776,7 +773,7 @@ body{
   color: #111111;
 }
 
-.sticky-note-large-yellow{
+.sticky-note-large-yellow {
   position: absolute;
   width: 50%;
   height: 50%;
@@ -787,7 +784,7 @@ body{
   border-bottom: solid 30px #E7D181;
 }
 
-.sticky-note-large-red{
+.sticky-note-large-red {
   position: absolute;
   width: 50%;
   height: 50%;
@@ -799,7 +796,7 @@ body{
 }
 
 
-input{
+input {
   position: absolute;
   background: none;
   border: none;
@@ -811,12 +808,13 @@ input{
   font-size: 30px;
   color: #111111;
 }
-input:focus{
+
+input:focus {
   outline: none;
 }
 
 @media all and (max-width: 600px) {
-  .box{
+  .desktop {
     width: 100%;
     height: 100vh;
   }

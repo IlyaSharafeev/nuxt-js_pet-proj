@@ -1,7 +1,7 @@
 <template>
-  <div class="uploader-container" style="height: 100%;">
+  <div class="uploader">
     <Icon name="bxs:cloud-download"></Icon>
-    <input class="uploader-input" type="file" accept="image/*" @change="upload" title="select image" />
+    <input class="uploader-input" type="file" accept="image/*" @change="upload" title="select image"/>
   </div>
 </template>
 
@@ -22,23 +22,23 @@ const upload = (e) => {
 </script>
 
 <style scoped lang="scss">
-
 * {
   cursor: pointer;
-}
 
-.uploader-container {
-  display: flex;
-  cursor: pointer;
+  .uploader {
+    display: flex;
+    cursor: pointer;
+    height: 100%;
 
-  svg {
-    width: 30px;
-    height: 16px;
-  }
+    svg {
+      width: 30px;
+      height: 16px;
+    }
 
-  .uploader-input {
-    position: absolute;
-    padding-left: 100px;
+    .uploader-input {
+      position: absolute;
+      padding-left: 100px;
+    }
   }
 }
 </style>

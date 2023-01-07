@@ -11,31 +11,31 @@
           </NuxtLink>
         </div>
         <div class="menu_topbar_right">
-<!--          <div class="lang">-->
-<!--            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--              <img v-if="$i18n.getLocaleCookie() === 'ua'" src="@/assets/images/english-flag.png" alt="ukraine-flag">-->
-<!--              <img v-if="$i18n.getLocaleCookie() === 'en'" src="@/assets/images/ukraine-flag.jpg" alt="english-flag">-->
-<!--            </button>-->
-<!--            <ul class="dropdown-menu">-->
-<!--              <li>-->
-<!--                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'ua'" href="#" @click.prevent.stop="$i18n.setLocale('en')">-->
-<!--                  <img src="@/assets/images/ukraine-flag.jpg"/>-->
-<!--                  {{$t('lang')}}-->
-<!--                </a>-->
-<!--                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'en'" href="#" @click.prevent.stop="$i18n.setLocale('ua')">-->
-<!--                  <img src="@/assets/images/english-flag.png"/>-->
-<!--                  {{$t('lang')}}-->
-<!--                </a>-->
-<!--              </li>-->
-<!--            </ul>-->
-<!--          </div>-->
+          <!--          <div class="lang">-->
+          <!--            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+          <!--              <img v-if="$i18n.getLocaleCookie() === 'ua'" src="@/assets/images/english-flag.png" alt="ukraine-flag">-->
+          <!--              <img v-if="$i18n.getLocaleCookie() === 'en'" src="@/assets/images/ukraine-flag.jpg" alt="english-flag">-->
+          <!--            </button>-->
+          <!--            <ul class="dropdown-menu">-->
+          <!--              <li>-->
+          <!--                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'ua'" href="#" @click.prevent.stop="$i18n.setLocale('en')">-->
+          <!--                  <img src="@/assets/images/ukraine-flag.jpg"/>-->
+          <!--                  {{$t('lang')}}-->
+          <!--                </a>-->
+          <!--                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'en'" href="#" @click.prevent.stop="$i18n.setLocale('ua')">-->
+          <!--                  <img src="@/assets/images/english-flag.png"/>-->
+          <!--                  {{$t('lang')}}-->
+          <!--                </a>-->
+          <!--              </li>-->
+          <!--            </ul>-->
+          <!--          </div>-->
           <div class="battery">
-            <span>{{getBatteryLevel()}}%</span>
-            <img v-if="charging" src="@/assets/images/charging-battery.png" alt="charging-battery" />
-            <img v-show="!charging" src="@/assets/images/battery.png" alt="charging-battery" />
+            <span>{{ getBatteryLevel() }}%</span>
+            <img v-if="charging" src="@/assets/images/charging-battery.png" alt="charging-battery"/>
+            <img v-show="!charging" src="@/assets/images/battery.png" alt="charging-battery"/>
           </div>
           <div class="namebook">
-            {{desktopStore.auth.name}}
+            {{ desktopStore.auth.name }}
           </div>
 
           <div class="tollbar">
@@ -56,7 +56,10 @@
         <FoldersDesktop/>
       </div>
 
-      <ThePopoverDesktopPage @close="closePopovers" @copy="mouseRightClick(e, 'copy')" @remove="mouseRightClick(e, 'remove')" @create="mouseRightClick(e, 'create')" v-if="showPopovers" :popoverOptions="popoverOptions" :positionX="positionXPopovers" :positionY="positionYPopovers"/>
+      <ThePopoverDesktopPage @close="closePopovers" @copy="mouseRightClick(e, 'copy')"
+                             @remove="mouseRightClick(e, 'remove')" @create="mouseRightClick(e, 'create')"
+                             v-if="showPopovers" :popoverOptions="popoverOptions" :positionX="positionXPopovers"
+                             :positionY="positionYPopovers"/>
     </div>
   </section>
 </template>
@@ -68,7 +71,7 @@ import ThePopoverDesktopPage from "/components/ThePopoverDesktopPage.vue";
 import FoldersDesktop from "../../components/FoldersDesktop";
 import {useDesktopStore} from "../../store/desktop";
 
-const { charging, level } = useBattery()
+const {charging, level} = useBattery()
 const desktopStore = useDesktopStore();
 
 useHead({
@@ -91,7 +94,7 @@ onMounted(() => {
 const getBatteryLevel = () => {
   const arr = String(level.value).split('');
 
-  if(arr.length > 1) {
+  if (arr.length > 1) {
     return +arr.slice(2).join('');
   }
 
@@ -113,7 +116,7 @@ const getRandomInt = (min = 0, max = 9999) => {
 
 const mouseRightClick = (event, option) => {
   //fix cursor click globally
-  if(event) {
+  if (event) {
     const position = {
       x: event.pageX,
       y: event.pageY,
@@ -121,7 +124,7 @@ const mouseRightClick = (event, option) => {
     desktopStore.setPositionPointer(position);
   }
 
-  if(option === 'create') {
+  if (option === 'create') {
     const randomId = getRandomInt();
     const newFolder = {
       id: randomId,
@@ -134,13 +137,13 @@ const mouseRightClick = (event, option) => {
     return;
   }
 
-  if(option === 'remove') {
+  if (option === 'remove') {
     desktopStore.removeFolder(desktopStore.editFolder);
     closePopovers();
     return;
   }
 
-  if(option === 'copy') {
+  if (option === 'copy') {
     const randomId = getRandomInt();
     const insertFolder = {
       id: randomId,
@@ -154,7 +157,7 @@ const mouseRightClick = (event, option) => {
   }
 
   //If you click on a folder
-  if(event?.target.closest("div[data-folder]")){
+  if (event?.target.closest("div[data-folder]")) {
     const editFolderId = event.target.closest("div[data-folder]").getAttribute("data-folder");
 
     desktopStore.setCopyFolder(editFolderId);
@@ -186,14 +189,17 @@ const closePopovers = () => {
 body {
   height: 100vh;
 }
+
 a {
   text-decoration: none;
   color: #fff;
+
   &:hover {
     text-decoration: none;
     color: #fff;
   }
 }
+
 svg {
   position: absolute;
 }
@@ -214,13 +220,16 @@ body.active {
   position: absolute;
   width: 100%;
   z-index: 1;
+
   a {
     color: #fff;
+
     &:hover {
       color: #fff;
       text-decoration: none;
     }
   }
+
   .menu_topbar {
     display: -webkit-box;
     display: -webkit-flex;
@@ -235,6 +244,7 @@ body.active {
     -ms-flex-pack: justify;
     justify-content: space-between;
     font-size: 14px;
+
     .menu_topbar_left {
       display: -webkit-box;
       display: -webkit-flex;
@@ -248,9 +258,11 @@ body.active {
       -ms-flex-align: center;
       align-items: center;
       color: #fff;
+
       span {
         font-weight: 900;
       }
+
       .mini_logo {
         max-width: 30px;
         height: 30px;
@@ -261,10 +273,12 @@ body.active {
         }
       }
     }
+
     .menu_topbar_right {
       display: flex;
       align-items: center;
       color: #fff;
+
       .lang {
         margin: 0 10px;
 
@@ -302,36 +316,46 @@ body.active {
           width: 20px;
         }
       }
+
       .battery {
         display: flex;
         align-items: center;
         justify-content: center;
+
         span {
           font-size: 13px;
           margin-right: 3px;
         }
+
         img {
           max-width: 20px;
           margin: 0 5px;
         }
       }
+
       .date {
         margin-right: 20px;
+
         #dayweek {
           margin-right: 2px;
         }
+
         #datamonth {
           margin-right: 5px;
         }
       }
+
       .namebook {
         padding: 0 20px;
       }
+
       .search {
         margin-right: 20px;
       }
+
       .tollbar {
         padding: 0 10px;
+
         img {
           width: 18px;
         }
@@ -353,8 +377,9 @@ body.active {
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
+
   .folder {
-    .folder_icon {
+    .folder-icon {
       -webkit-transition: .3s;
       -o-transition: .3s;
       transition: .3s;
@@ -376,11 +401,13 @@ body.active {
       -ms-flex-align: center;
       align-items: center;
       margin: 0 auto;
+
       img {
         width: 60px;
       }
     }
-    .folder_name {
+
+    .folder-name {
       font-family: Lato, sans-serif;
       font-weight: 700;
       font-size: 11px;
@@ -398,8 +425,9 @@ body.active {
       text-align: center;
     }
   }
+
   .desktop_folders {
-    .btn_folder {
+    .folder-wrapper_btn {
       background-color: transparent;
       border: none;
       outline: 0;
@@ -427,9 +455,11 @@ body.active {
       -webkit-transition: .3s;
       -o-transition: .3s;
       transition: .3s;
+
       &:hover {
         text-decoration: none;
-        .folder_icon {
+
+        .folder-icon {
           background-color: rgba(0, 0, 0, .3);
           border-color: rgba(160, 172, 191, .3);
         }
@@ -460,6 +490,7 @@ body.active {
   height: 100%;
   background: rgba(55, 55, 55, .9);
   border-left: 1px solid #a6a9b2;
+
   &:before {
     position: absolute;
     right: 0;
@@ -472,6 +503,7 @@ body.active {
     z-index: -1;
     background: inherit;
   }
+
   .top_tabs {
     padding: 15px 15px;
     border-bottom: 1px solid #a6a9b2;
@@ -487,6 +519,7 @@ body.active {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
+
     .tab_today {
       .today {
         padding: 2px 50px;
@@ -494,11 +527,13 @@ body.active {
         border-radius: 4px 0 0 4px;
         color: #eaeaea;
       }
+
       .today.active {
         background-color: #b4b3b4;
         color: #262525;
       }
     }
+
     .tab_notifications {
       .notifications {
         padding: 2px 35px;
@@ -506,21 +541,25 @@ body.active {
         border-radius: 0 4px 4px 0;
         color: #eaeaea;
       }
+
       .notifications.active {
         background-color: #b4b3b4;
         color: #262525;
       }
     }
   }
+
   .tollbar_dayweek_and_data {
     padding-left: 40px;
     padding-top: 40px;
+
     .tollbar_dayweek {
       font-size: 34px;
       color: #eaeaea;
       font-weight: 100;
     }
   }
+
   .tollbar_datamonth {
     span {
       font-size: 34px;

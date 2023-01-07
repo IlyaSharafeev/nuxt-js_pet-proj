@@ -14,7 +14,3 @@ defineProps(({
 
 const desktopStore = useDesktopStore();
 </script>
-
-<style scoped>
-
-</style>

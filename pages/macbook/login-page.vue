@@ -9,23 +9,23 @@
         <li :class="{'active': activeList === 3}"></li>
         <li :class="{'active': activeList === 4}"></li>
       </ul>
-      <fieldset class="username" v-if="activeList === 1" :class="{'enable': activeList === 1}">
+      <fieldset class="name" v-if="activeList === 1" :class="{'enable': activeList === 1}">
         <div class="icon left"><em class="user"></em></div>
         <input type="text" name="username" placeholder="Username" v-model="v$.name.$model"/>
         <div class="icon right button"><em class="arrow"></em></div>
-        <p v-if="v$.name.$error" class="error">{{v$.name.$errors[0].$message}}</p>
+        <p v-if="v$.name.$error" class="error">{{ v$.name.$errors[0].$message }}</p>
       </fieldset>
-      <fieldset class="mail" v-if="activeList === 2" :class="{'enable': activeList === 2}">
+      <fieldset class="email" v-if="activeList === 2" :class="{'enable': activeList === 2}">
         <div class="icon left"><em class="letter"></em></div>
         <input type="email" name="email" placeholder="Email" v-model.trim="v$.email.$model"/>
         <div class="icon right button"><em class="arrow"></em></div>
-        <p v-if="v$.email.$error" class="error">{{v$.email.$errors[0].$message}}</p>
+        <p v-if="v$.email.$error" class="error">{{ v$.email.$errors[0].$message }}</p>
       </fieldset>
       <fieldset class="password" v-if="activeList === 3" :class="{'enable': activeList === 3}">
         <div class="icon left"><em class="lock"></em></div>
         <input type="password" name="password" placeholder="Password" v-model.trim="v$.password.$model"/>
         <div class="icon right button"><em class="arrow"></em></div>
-        <p v-if="v$.password.$error" class="error">{{v$.password.$errors[0].$message}}</p>
+        <p v-if="v$.password.$error" class="error">{{ v$.password.$errors[0].$message }}</p>
       </fieldset>
       <fieldset class="thanks" v-if="activeList === 4" :class="{'enable': activeList === 4}" @click="login">
         <div class="icon left"><em class="heart"></em></div>
@@ -38,7 +38,7 @@
 
 <script setup>
 import {onMounted, reactive, ref} from "vue";
-import { useVuelidate } from '@vuelidate/core';
+import {useVuelidate} from '@vuelidate/core';
 import {required, email, minLength, maxLength} from '@vuelidate/validators';
 import {useRouter} from "nuxt/app";
 import {useDesktopStore} from "../../store/desktop";
@@ -54,9 +54,9 @@ const registerForm = reactive({
 })
 
 const rules = {
-  name: { required, min: minLength(2), max: maxLength(24) },
-  email: { required, email },
-  password: { required, min: minLength(6), max: maxLength(24) },
+  name: {required, min: minLength(2), max: maxLength(24)},
+  email: {required, email},
+  password: {required, min: minLength(6), max: maxLength(24)},
 }
 
 const v$ = useVuelidate(rules, registerForm);
@@ -82,17 +82,17 @@ function next(target) {
 function keyDown(event) {
   let key = event.keyCode,
       target = document.querySelector('fieldset.enable .button');
-  if(activeList.value === 1 && v$.value.name.$error) {
+  if (activeList.value === 1 && v$.value.name.$error) {
     activeList.value = 1;
     return;
   }
 
-  if(activeList.value === 2 && v$.value.email.$error) {
+  if (activeList.value === 2 && v$.value.email.$error) {
     activeList.value = 2;
     return;
   }
 
-  if(activeList.value === 3 && v$.value.password.$error) {
+  if (activeList.value === 3 && v$.value.password.$error) {
     activeList.value = 3;
     return;
   }
@@ -103,11 +103,11 @@ function keyDown(event) {
 }
 
 onMounted(() => {
-document.body.onmouseup = function (event) {
-  let target = event.target || event.toElement;
-  if (target.classList.contains("button")) next(target);
-};
-document.addEventListener("keydown", keyDown, false);
+  document.body.onmouseup = function (event) {
+    let target = event.target || event.toElement;
+    if (target.classList.contains("button")) next(target);
+  };
+  document.addEventListener("keydown", keyDown, false);
 })
 
 const login = () => {
@@ -120,11 +120,13 @@ const login = () => {
 <style lang="sass">
 body
   background: hsl(120, 60, 50)
-  font-family: sans-serif
+
   fieldset
     box-shadow: 0 8px 10px hsl(120, 60, 40)
+
 body.error
   background: hsl(16, 100, 47)
+
   fieldset
     box-shadow: 0 8px 10px hsl(16, 100, 37)
 
@@ -135,10 +137,12 @@ h1, h2
   font-family: sans-serif
   text-transform: uppercase
   letter-spacing: 2px
+
 h1
   top: 24px
   color: hsl(0, 0, 100)
   font-size: 12px
+
 h2
   top: 44px
   color: hsl(0, 0, 100)
@@ -152,6 +156,7 @@ ul.items
   top: 50%
   left: -60px
   transform: translateY(-50%)
+
   li
     width: 8px
     height: 8px
@@ -160,6 +165,7 @@ ul.items
     border-radius: 50%
     opacity: 0.4
     cursor: pointer
+
   li.active
     opacity: 1
 
@@ -170,6 +176,7 @@ form
   top: 50%
   left: 50%
   transform: translate(-50%, -50%)
+
   fieldset
     position: absolute
     width: 300px
@@ -179,6 +186,7 @@ form
     opacity: 0
     transform: scale(0.2)
     transition: all 0.4s ease-in-out
+
     input, p
       display: inline-block
       width: 200px
@@ -186,31 +194,39 @@ form
       color: hsl(0, 0, 20)
       font-size: 16px
       letter-spacing: 1px
+
     p
       margin-top: 22px
       text-align: center
+
     input
       height: 40px
       margin-top: 8px
       border: none
       outline: none
+
     .icon
       position: absolute
       width: 30px
       height: 30px
       top: 15px
       transition: all 0.4s ease
+
       em
         position: absolute
         display: block
+
         &::before, &::after
           position: absolute
           content: ''
+
     .icon.left
       left: 10px
+
     .icon.right
       right: 10px
       cursor: pointer
+
     .icon.button:hover
       background: hsl(0, 0, 95)
       border-radius: 3px
@@ -222,10 +238,12 @@ form
     transition: all 0.5s ease-out 0.2s
     transform: scale(1)
     animation: enable 0.5s ease-out 0.2s
+
   fieldset.disable
     opacity: 0
     transition: all 0.3s ease-in
     transform: translateY(120px) scale(0.9)
+
 body.error fieldset
   transform-origin: 50% 100%
   animation: error 0.3s ease-out
@@ -239,6 +257,7 @@ body.error fieldset
   100%
     opacity: 1
     transform: scale(1)
+
 @keyframes error
   0%, 50%, 100%
     transform: rotate(0deg)
@@ -257,6 +276,7 @@ body.error fieldset
   top: 5px
   left: 14px
   background: hsl(0, 0, 20)
+
   &::before
     width: 6px
     height: 6px
@@ -266,6 +286,7 @@ body.error fieldset
     border-right: 2px solid
     border-bottom: 2px solid
     transform: rotate(45deg)
+
 .icon .user
   width: 20px
   height: 10px
@@ -273,6 +294,7 @@ body.error fieldset
   left: 5px
   box-shadow: 0 0 0 2px hsl(0, 0, 20) inset
   border-radius: 6px 6px 3px 3px
+
   &::before
     width: 10px
     height: 10px
@@ -280,6 +302,7 @@ body.error fieldset
     left: 5px
     box-shadow: 0 0 0 2px hsl(0, 0, 20) inset
     border-radius: 50%
+
 .icon .letter
   width: 20px
   height: 12px
@@ -287,17 +310,21 @@ body.error fieldset
   left: 5px
   box-shadow: 0 0 0 2px hsl(0, 0, 20) inset
   border-radius: 3px
+
   &::before, &::after
     width: 11px
     height: 2px
     top: 4px
     background: hsl(0, 0, 20)
+
   &::before
     left: 0
     transform: rotate(30deg)
+
   &::after
     right: 0
     transform: rotate(-30deg)
+
 .icon .lock
   width: 20px
   height: 16px
@@ -305,6 +332,7 @@ body.error fieldset
   left: 5px
   box-shadow: 0 0 0 2px hsl(0, 0, 20) inset
   border-radius: 3px
+
   &::before
     width: 8px
     height: 8px
@@ -315,12 +343,14 @@ body.error fieldset
     border-right: 2px solid hsl(0, 0, 20)
     border-radius: 50%
     transform: rotate(-45deg)
+
   &::after
     width: 6px
     height: 7px
     top: 4px
     left: 7px
     box-shadow: 0 0 0 2px hsl(0, 0, 20) inset
+
 .icon .heart
   width: 10px
   height: 10px
@@ -328,13 +358,16 @@ body.error fieldset
   left: 7px
   background: hsl(9, 100, 60)
   transform: rotate(45deg)
+
   &::before, &::after
     width: 10px
     height: 10px
     border-radius: 50%
     background: hsl(9, 100, 60)
+
   &::before
     left: -6px
+
   &::after
     top: -6px
 

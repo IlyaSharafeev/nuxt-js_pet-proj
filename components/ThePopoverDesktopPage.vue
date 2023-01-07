@@ -1,26 +1,37 @@
 <template>
-  <div class="container">
-    <!-- code here -->
-    <div class="menu" ref="target" :style="{'top': props.positionY + 'px', 'left': props.positionX + 'px'}">
-      <ul class="menu-list" v-if="popoverOptions.create">
-<!--        <li class="menu-item"><button class="menu-button menu-button&#45;&#45;black"><i data-feather="circle"></i>No status<i data-feather="chevron-right"></i></button>-->
-<!--          <ul class="menu-sub-list">-->
-<!--            <li class="menu-item"><button class="menu-button menu-button&#45;&#45;orange"><i data-feather="square"></i>Needs review</button></li>-->
-<!--            <li class="menu-item"><button class="menu-button menu-button&#45;&#45;purple"><i data-feather="octagon"></i>In progress</button></li>-->
-<!--            <li class="menu-item"><button class="menu-button menu-button&#45;&#45;green"><i data-feather="triangle"></i>Approved</button></li>-->
-<!--            <li class="menu-item"><button class="menu-button menu-button&#45;&#45;black menu-button&#45;&#45;checked"><i data-feather="circle"></i>No status<i data-feather="check"></i></button></li>-->
-<!--          </ul>-->
-<!--        </li>-->
-        <li class="menu-item" @click="create"><button class="menu-button"><Icon name="ep:circle-plus-filled" />Create a folder</button></li>
+  <div class="popover">
+    <div class="popover__menu" ref="target" :style="{'top': props.positionY + 'px', 'left': props.positionX + 'px'}">
+      <ul class="popover__menu-list" v-if="popoverOptions.create">
+        <li class="popover__menu-list-item" @click="create">
+          <button class="popover__menu-list-item__button">
+            <Icon name="ep:circle-plus-filled"/>
+            Create a folder
+          </button>
+        </li>
       </ul>
-      <ul class="menu-list" v-if="popoverOptions.rename">
-        <li class="menu-item" @click="rename"><button class="menu-button"><Icon name="ep:edit-pen" />Rename</button></li>
+      <ul class="popover__menu-list" v-if="popoverOptions.rename">
+        <li class="popover__menu-list-item" @click="rename">
+          <button class="popover__menu-list-item__button">
+            <Icon name="ep:edit-pen"/>
+            Rename
+          </button>
+        </li>
       </ul>
-      <ul class="menu-list" v-if="popoverOptions.rename">
-        <li class="menu-item" @click="copy"><button class="menu-button"><Icon name="bxs:add-to-queue" />Copy</button></li>
+      <ul class="popover__menu-list" v-if="popoverOptions.rename">
+        <li class="popover__menu-list-item" @click="copy">
+          <button class="popover__menu-list-item__button">
+            <Icon name="bxs:add-to-queue"/>
+            Copy
+          </button>
+        </li>
       </ul>
-      <ul class="menu-list" v-if="popoverOptions.delete">
-        <li class="menu-item" @click="remove"><button class="menu-button menu-button--delete"><Icon name="ep:close-bold" />Delete</button></li>
+      <ul class="popover__menu-list" v-if="popoverOptions.delete">
+        <li class="popover__menu-list-item" @click="remove">
+          <button class="popover__menu-list-item__button menu-button--delete">
+            <Icon name="ep:close-bold"/>
+            Delete
+          </button>
+        </li>
       </ul>
     </div>
   </div>
@@ -28,15 +39,15 @@
 
 <script setup>
 import {ref} from "vue";
-import { onClickOutside } from '@vueuse/core'
+import {onClickOutside} from '@vueuse/core'
 import {useDesktopStore} from "../store/desktop";
 
 const emit = defineEmits([
-    'close',
-    'remove',
-    'copy',
-    'create',
-    'editMode',
+  'close',
+  'remove',
+  'copy',
+  'create',
+  'editMode',
 ])
 
 const props = defineProps(({
@@ -71,140 +82,7 @@ onClickOutside(target, () => emit('close'));
 </script>
 
 <style scoped lang="scss">
-
-.menu {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-bg-secondary);
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(#404040, 0.15);
-  position: fixed;
-}
-
-.menu-list {
-  margin: 0;
-  display: block;
-  width: 100%;
-  padding: 8px;
-  & + .menu-list {
-    border-top: 1px solid #ddd;
-  }
-}
-.menu-sub-list {
-  display: none;
-  padding: 8px;
-  background-color: var(--color-bg-secondary);
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(#404040, 0.15);
-  position: absolute;
-  left: 100%;
-  right: 0;
-  z-index: 100;
-  width: 100%;
-  top: 0;
-  flex-direction: column;
-  // &:after {
-  //   content: "";
-  //   position: absolute;
-  //   left: -12px;
-  //   top: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   display: block;
-  //   outline: 2px solid hotpink;
-  // }
-  &:hover {
-    display: flex;
-  }
-}
-
-.menu-item {
-  position: relative;
-}
-
-.menu-button {
-  font: inherit;
-  border: 0;
-  padding: 8px 8px;
-  padding-right: 36px;
-  width: 100%;
-  border-radius: 8px;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  position: relative;
-  background-color: var(--color-bg-secondary);
-  &:hover {
-    background-color: var(--color-bg-primary-offset);
-    & + .menu-sub-list {
-      display: flex;
-    }
-    svg {
-      stroke: var(--color-text-primary);
-    }
-  }
-  svg {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    stroke: var(--color-text-primary-offset);
-    &:nth-of-type(2) {
-      margin-right: 0;
-      position: absolute;
-      right: 8px;
-    }
-  }
-
-  &--delete {
-    &:hover {
-      color: var(--color-red);
-      svg:first-of-type {
-        stroke: var(--color-red);
-      }
-    }
-  }
-
-  &--download {
-    &:hover {
-      color: var(--color-green);
-      svg:first-of-type {
-        stroke: var(--color-green);
-      }
-    }
-  }
-
-  &--orange {
-    svg:first-of-type {
-      stroke: var(--color-orange);
-    }
-  }
-
-  &--green {
-    svg:first-of-type {
-      stroke: var(--color-green);
-    }
-  }
-  &--purple {
-    svg:first-of-type {
-      stroke: var(--color-purple);
-    }
-  }
-  &--black {
-    svg:first-of-type {
-      stroke: var(--color-black);
-    }
-  }
-
-  &--checked {
-    svg:nth-of-type(2) {
-      stroke: var(--color-purple);
-    }
-  }
-}
-
-// Codepen spesific styling - only to center the elements in the pen preview and viewport
-.container {
+.popover {
   position: absolute;
   top: 0;
   left: 0;
@@ -214,6 +92,120 @@ onClickOutside(target, () => emit('close'));
   display: flex;
   align-items: center;
   justify-content: center;
+  background: transparent;
+  border: 0;
+
+  .popover__menu {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg-secondary);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(#404040, 0.15);
+    position: fixed;
+
+    .popover__menu-list {
+      margin: 0;
+      display: block;
+      width: 100%;
+      padding: 8px;
+
+      & + .popover__menu-list {
+        border-top: 1px solid #ddd;
+      }
+
+      .popover__menu-list-item {
+        position: relative;
+
+        .popover__menu-list-item__button {
+          font: inherit;
+          border: 0;
+          padding: 8px 36px 8px 8px;
+          width: 100%;
+          border-radius: 8px;
+          text-align: left;
+          display: flex;
+          align-items: center;
+          position: relative;
+          background-color: var(--color-bg-secondary);
+
+          &:hover {
+            background-color: var(--color-bg-primary-offset);
+
+            & + .menu-sub-list {
+              display: flex;
+            }
+
+            svg {
+              stroke: var(--color-text-primary);
+            }
+          }
+
+          svg {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            stroke: var(--color-text-primary-offset);
+
+            &:nth-of-type(2) {
+              margin-right: 0;
+              position: absolute;
+              right: 8px;
+            }
+          }
+
+          &--delete {
+            &:hover {
+              color: var(--color-red);
+
+              svg:first-of-type {
+                stroke: var(--color-red);
+              }
+            }
+          }
+
+          &--download {
+            &:hover {
+              color: var(--color-green);
+
+              svg:first-of-type {
+                stroke: var(--color-green);
+              }
+            }
+          }
+
+          &--orange {
+            svg:first-of-type {
+              stroke: var(--color-orange);
+            }
+          }
+
+          &--green {
+            svg:first-of-type {
+              stroke: var(--color-green);
+            }
+          }
+
+          &--purple {
+            svg:first-of-type {
+              stroke: var(--color-purple);
+            }
+          }
+
+          &--black {
+            svg:first-of-type {
+              stroke: var(--color-black);
+            }
+          }
+
+          &--checked {
+            svg:nth-of-type(2) {
+              stroke: var(--color-purple);
+            }
+          }
+        }
+      }
+    }
+  }
 }
-// End Codepen spesific styling
 </style>
