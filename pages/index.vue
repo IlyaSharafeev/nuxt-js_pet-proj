@@ -137,23 +137,23 @@ const mouse = ref(null);
 
 // `style` will be a helper computed for `left: ?px; top: ?px;`
 const gamebodyStyle = useDraggable(gameboy, {
-  initialValue: { x: 1200, y: 500 },
+  initialValue: { x: 500, y: 700 },
 }).style;
 
 const stickyRedStyle = useDraggable(stickyRed, {
-  initialValue: { x: 200, y: 200 },
+  initialValue: { x: 100, y: 150 },
 }).style;
 
 const stickyYellowStyle = useDraggable(stickyYellow, {
-  initialValue: { x: 100, y: 100 },
+  initialValue: { x: 50, y: 100 },
 }).style;
 
 const penStyle = useDraggable(pen, {
-  initialValue: { x: 400, y: 400 },
+  initialValue: { x: 200, y: 300 },
 }).style;
 
 const mouseStyle = useDraggable(mouse, {
-  initialValue: { x: 850, y: 500 },
+  initialValue: { x: 250, y: 500 },
 }).style;
 </script>
 

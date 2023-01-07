@@ -75,6 +75,10 @@ useHead({
   titleTemplate: '%s - computer',
 })
 
+definePageMeta({
+  middleware: ["desktop-auth"]
+})
+
 // disabling the default modal on right click and calling a function on click
 onMounted(() => {
   document.oncontextmenu = function () {
@@ -321,7 +325,7 @@ body.active {
         }
       }
       .namebook {
-        margin-right: 20px;
+        padding: 0 20px;
       }
       .search {
         margin-right: 20px;
