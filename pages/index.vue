@@ -1,7 +1,7 @@
 <template>
   <div id="desk">
       <div id="sticky-notes">
-        <NuxtLink to="/notes/note-red">
+        <div>
           <div class="sticky-note-red" ref="stickyRed" :style="stickyRedStyle">
             <div class="sticky-text">
               {{stickyTextRed}}
@@ -9,8 +9,8 @@
             <div class="bottom-strip-1">
             </div>
           </div>
-        </NuxtLink>
-        <NuxtLink to="/notes/note-yellow">
+        </div>
+        <div>
           <div class="sticky-note-yellow" ref="stickyYellow" :style="stickyYellowStyle">
             <div class="sticky-text">
               {{stickyTextYellow}}
@@ -18,15 +18,12 @@
             <div class="bottom-strip-2">
             </div>
           </div>
-        </NuxtLink>
+        </div>
       </div>
     <NuxtLink to="macbook/login-page">
       <div class="computer-container">
         <div class="screen">
-          <div class="logo-container">
-            <img class="screen-logo" alt="img alt" src="@/assets/images/logo-onix.jpg" />
-          </div>
-
+          <div class="logo-container" />
         </div>
         <div class="bottom-computer">
           <div class="keyboard-container">
@@ -129,8 +126,8 @@ useHead({
   titleTemplate: '%s',
 })
 
-const stickyTextRed = ref("123");
-const stickyTextYellow = ref("456");
+const stickyTextRed = ref(null);
+const stickyTextYellow = ref(null);
 
 const gameboy = ref(null);
 const stickyRed = ref(null);

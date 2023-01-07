@@ -15,16 +15,17 @@ export const useDesktopStore = defineStore({
         x: null,
         y: null,
       },
+      background: 'https://github.com/seuraltimez/desktopmac/blob/master/img/src/bg.jpg?raw=true',
       folders: [
         {
           id: 0,
-          title: 'store folder title1',
+          title: 'computer',
           defaultPositionX: 0,
           defaultPositionY: 200,
         },
         {
           id: 1,
-          title: 'store folder title2',
+          title: 'resume',
           defaultPositionX: 0,
           defaultPositionY: 400,
         },
@@ -34,6 +35,9 @@ export const useDesktopStore = defineStore({
   actions: {
     setAuthName(name) {
       this.auth.name = name;
+    },
+    setBackgroundDesktop(backgroundUrl) {
+      this.background = backgroundUrl;
     },
     assignEditFolder(folderId) {
       this.editFolder = folderId;

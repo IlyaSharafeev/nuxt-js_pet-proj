@@ -6,12 +6,10 @@ html, body, div, span, object, iframe, figure, h1, h2, h3, h4, h5, h6, p, blockq
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
   vertical-align: baseline;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  text-size-adjust: none;
 }
 
 footer, header, nav, section, main{
@@ -20,6 +18,12 @@ footer, header, nav, section, main{
 
 body{
   line-height: 1;
+  height: 100vh;
+  width: 100%;
+  font-family: Lato, sans-serif;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  overflow: hidden;
 }
 
 ol, ul{

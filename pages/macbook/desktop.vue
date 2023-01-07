@@ -11,39 +11,31 @@
           </NuxtLink>
         </div>
         <div class="menu_topbar_right">
-          <div class="lang">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img v-if="$i18n.getLocaleCookie() === 'ua'" src="@/assets/images/english-flag.png" alt="ukraine-flag">
-              <img v-if="$i18n.getLocaleCookie() === 'en'" src="@/assets/images/ukraine-flag.jpg" alt="english-flag">
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'ua'" href="#" @click.prevent.stop="$i18n.setLocale('en')">
-                  <img src="@/assets/images/ukraine-flag.jpg"/>
-                  {{$t('lang')}}
-                </a>
-                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'en'" href="#" @click.prevent.stop="$i18n.setLocale('ua')">
-                  <img src="@/assets/images/english-flag.png"/>
-                  {{$t('lang')}}
-                </a>
-              </li>
-            </ul>
-          </div>
+<!--          <div class="lang">-->
+<!--            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--              <img v-if="$i18n.getLocaleCookie() === 'ua'" src="@/assets/images/english-flag.png" alt="ukraine-flag">-->
+<!--              <img v-if="$i18n.getLocaleCookie() === 'en'" src="@/assets/images/ukraine-flag.jpg" alt="english-flag">-->
+<!--            </button>-->
+<!--            <ul class="dropdown-menu">-->
+<!--              <li>-->
+<!--                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'ua'" href="#" @click.prevent.stop="$i18n.setLocale('en')">-->
+<!--                  <img src="@/assets/images/ukraine-flag.jpg"/>-->
+<!--                  {{$t('lang')}}-->
+<!--                </a>-->
+<!--                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'en'" href="#" @click.prevent.stop="$i18n.setLocale('ua')">-->
+<!--                  <img src="@/assets/images/english-flag.png"/>-->
+<!--                  {{$t('lang')}}-->
+<!--                </a>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--          </div>-->
           <div class="battery">
             <span>{{getBatteryLevel()}}%</span>
             <img v-if="charging" src="@/assets/images/charging-battery.png" alt="charging-battery" />
             <img v-show="!charging" src="@/assets/images/battery.png" alt="charging-battery" />
           </div>
-          <div class="date">
-            <span id="dayweek"></span>
-            <span id="datamonth"></span>
-            <span id="time"></span>
-          </div>
           <div class="namebook">
             {{desktopStore.auth.name}}
-          </div>
-          <div class="search">
-            <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
           </div>
 
           <div class="tollbar">
@@ -51,23 +43,10 @@
               <img src="https://github.com/seuraltimez/desktopmac/blob/master/img/src/tollbar.png?raw=true" alt="">
             </button>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="tollbar_opening">
-      <div class="top_tabs">
-        <div class="tab_today">
-          <a href="#" class="today active">Сегодня</a>
-        </div>
-        <div class="tab_notifications">
-          <a href="#" class="notifications">Уведомления</a>
-        </div>
-      </div>
-      <div class="tollbar_dayweek_and_data">
-        <div id="tollbar_dayweek" class="tollbar_dayweek"></div>
-        <div class="tollbar_datamonth">
-          <span id="tolldatamonth"></span>
+          <div class="upload">
+            <UploaderImage/>
+          </div>
         </div>
       </div>
     </div>
@@ -102,6 +81,7 @@ onMounted(() => {
     mouseRightClick(event)
     return false;
   };
+  document.body.style.background = `url(${desktopStore.background})`;
 })
 
 const getBatteryLevel = () => {
@@ -200,7 +180,7 @@ const closePopovers = () => {
 
 <style scoped lang="scss">
 body {
-  font-family: Lato, sans-serif;
+  height: 100vh;
 }
 a {
   text-decoration: none;
@@ -220,15 +200,6 @@ body.active {
     right: 0;
     z-index: 2;
   }
-}
-
-.section_fullpage {
-  background-image: url(https://github.com/seuraltimez/desktopmac/blob/master/img/src/bg.jpg?raw=true);
-  width: 100%;
-  height: 100vh;
-  background-size: cover;
-  position: relative;
-  overflow: hidden;
 }
 
 .section_fullpage_top {
@@ -287,16 +258,7 @@ body.active {
       }
     }
     .menu_topbar_right {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
       display: flex;
-      -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-      -webkit-box-align: center;
-      -webkit-align-items: center;
-      -ms-flex-align: center;
       align-items: center;
       color: #fff;
       .lang {
@@ -336,16 +298,7 @@ body.active {
           width: 20px;
         }
       }
-      .bluetooth {
-        margin-right: 15px;
-        font-size: 18px;
-      }
-      .wifi {
-        margin-right: 15px;
-        font-size: 18px;
-      }
       .battery {
-        margin-right: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -374,7 +327,7 @@ body.active {
         margin-right: 20px;
       }
       .tollbar {
-        margin-right: 20px;
+        padding: 0 10px;
         img {
           width: 18px;
         }

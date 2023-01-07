@@ -1,6 +1,4 @@
 
-I
-assets/styles/_reset.scss,c\2\c28c9ec1cbaac71cb63a233801f37321fd2daf97
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
@@ -36,8 +34,6 @@ w
 G.idea/sonarlint/issuestore/5/a/5ae13be01940da1dd833c8b257849adecfd2ecfa,0\9\0954018989da5fb4a57c21360df8bfaa3b62c678
 >
 nuxt.config.ts,e\4\e44500e8e3ef8f6dba8f3d3501f7d772d94a973c
-M
-components/FoldersDesktop.vue,7\a\7a00624e7e70a416226d03057c4b387364c40939
 w
 G.idea/sonarlint/issuestore/8/1/8120d7d7e9b60553a414a2a78c1097ed4f6749ae,c\e\ce5049390fb1e86f476829788c69883b5230c8d6
 w
