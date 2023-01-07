@@ -43,6 +43,10 @@ import {required, email, minLength, maxLength} from '@vuelidate/validators';
 import {useRouter} from "nuxt/app";
 import {useDesktopStore} from "../../store/desktop";
 
+definePageMeta({
+  middleware: ["desktop-auth"]
+})
+
 const registerForm = reactive({
   name: '',
   email: '',
@@ -107,8 +111,9 @@ document.addEventListener("keydown", keyDown, false);
 })
 
 const login = () => {
-  router.push('/macbook/desktop');
   desktopStore.setAuthName(registerForm.name);
+  router.push('/macbook/desktop');
+  localStorage.setItem('token', '4304o31op3kgo3090i90k0g');
 };
 </script>
 

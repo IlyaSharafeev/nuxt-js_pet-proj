@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import {localFetch} from "nitropack/dist/runtime/entries/nitro-prerenderer";
 
 export const useDesktopStore = defineStore({
   id: 'desktop-store',

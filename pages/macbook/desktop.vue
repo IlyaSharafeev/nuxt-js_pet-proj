@@ -102,11 +102,6 @@ onMounted(() => {
     mouseRightClick(event)
     return false;
   };
-  desktopStore.setUser('ilya');
-})
-
-definePageMeta({
-  middleware: ["desktop-auth"]
 })
 
 const getBatteryLevel = () => {

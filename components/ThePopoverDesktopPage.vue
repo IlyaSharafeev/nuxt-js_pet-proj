@@ -35,6 +35,7 @@ const emit = defineEmits([
     'close',
     'remove',
     'copy',
+    'create',
     'editMode',
 ])
 

@@ -19,8 +19,7 @@
 
 <script setup>
 import {defineProps, onMounted, ref} from "vue";
-import {useDraggable} from "@vueuse/core/index";
-import {onClickOutside} from '@vueuse/core';
+import {useDraggable, onClickOutside} from "@vueuse/core";
 
 import {useDesktopStore} from "../store/desktop";
 

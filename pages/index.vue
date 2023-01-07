@@ -110,12 +110,16 @@
         <div class="start"></div>
         <div class="select"></div>
       </div>
+    <img :src="qrcode" alt="QR Code" class="qrcode" />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { useDraggable } from '@vueuse/core'
+import { useQRCode } from '@vueuse/integrations/useQRCode'
+
+const qrcode = useQRCode('https://www.instagram.com/ilya__sharafeev/');
 
 definePageMeta({
   layout: 'desktop'
@@ -159,6 +163,15 @@ const mouseStyle = useDraggable(mouse, {
 <style scoped lang="scss">
 body{
   background: #EBF3FE;
+}
+
+.qrcode {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+  max-width: 110px;
+  z-index: 2;
 }
 
 .computer-container{

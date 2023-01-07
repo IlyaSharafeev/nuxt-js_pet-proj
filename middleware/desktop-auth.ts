@@ -1,3 +1,5 @@
-export default defineNuxtRouteMiddleware((to, from) => {
-
+export default defineNuxtRouteMiddleware(() => {
+    if (window.localStorage.getItem('token')) {
+        return navigateTo('/macbook/desktop');
+    }
 })
