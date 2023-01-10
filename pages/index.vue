@@ -16,8 +16,8 @@
         </div>
     <NuxtLink to="/macbook/login-page" class="computer-container">
       <div class="screen">
-          <div class="logo-container"/>
-        </div>
+        <img src="https://mlemtech.com/mlems/1580098954680.jpg" alt="logo" />
+      </div>
       <div class="bottom-computer">
           <div class="keyboard-container">
             <div id="keyboard-row-1">
@@ -106,6 +106,7 @@
 <script setup>
 import {ref} from 'vue'
 import {useDraggable} from '@vueuse/core'
+import axios from "axios";
 import {useQRCode} from '@vueuse/integrations/useQRCode'
 
 definePageMeta({
@@ -116,8 +117,26 @@ useHead({
   titleTemplate: '%s',
 })
 
-const qrcodeHref = useQRCode('https://www.instagram.com/ilya__sharafeev/');
+useAsyncData(() => {
+  const options = {
+    method: 'GET',
+    url: 'https://mlemapi.p.rapidapi.com/randommlem',
+    params: {brightness: 'bright', maxheight: '1000', maxwidth: '1000'},
+    headers: {
+      'X-RapidAPI-Key': 'd6318cbb8dmsha9d0ea67d7d12dap19e98fjsn97783168f7e2',
+      'X-RapidAPI-Host': 'mlemapi.p.rapidapi.com'
+    }
+  };
 
+  axios.request(options).then(function (response) {
+    mlemSrc.value = response.data.url;
+  }).catch(function (error) {
+    console.error(error);
+  });
+})
+
+const qrcodeHref = useQRCode('https://www.instagram.com/ilya__sharafeev/');
+const mlemSrc = ref(null);
 const stickyTextRed = ref(null);
 const stickyTextYellow = ref(null);
 
