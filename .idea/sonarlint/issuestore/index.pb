@@ -31,8 +31,6 @@ G.idea/sonarlint/issuestore/2/b/2b2270b1f1710ba0daa03125b863efce765ab197,5\a\5a
 w
 G.idea/sonarlint/issuestore/4/d/4d32fe30a05e50b53d55d0d9bbc0b188f3ff781a,b\8\b84729f702542b89f7200e899c70ed4b79a0ec7e
 w
-G.idea/sonarlint/issuestore/a/6/a65934e5a53e8d81d4585e7df894813f5ea21bb2,8\1\8120d7d7e9b60553a414a2a78c1097ed4f6749ae
-w
 G.idea/sonarlint/issuestore/f/6/f6e16caef74f0dc9025a5157c9ceea85fc509934,1\4\1442159b16c6a206f5e388d7c6f973a63384b939
 J
 middleware/desktop-auth.ts,6\e\6ed7510276dbd36a362b4cecc1b050a74654cdcf
