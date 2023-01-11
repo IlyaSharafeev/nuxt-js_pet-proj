@@ -33,5 +33,5 @@ export default defineNuxtConfig({
         transpile: ['AppModal']
     },
     plugins: ['@/directives/pulse.ts'],
-    ssr: false,
+    ssr: true,
 })
