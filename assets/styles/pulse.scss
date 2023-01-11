@@ -1,0 +1,18 @@
+.pulse-effect {
+  animation: scale_pulsing 0.8s infinite linear;
+}
+
+@keyframes scale_pulsing {
+  0% {
+    scale: 1;
+    color: white;
+  }
+  50% {
+    scale: 1.5;
+    color: navajowhite;
+  }
+  100% {
+    scale: 1;
+    color: white;
+  }
+}

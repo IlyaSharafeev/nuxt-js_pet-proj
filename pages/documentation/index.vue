@@ -1,6 +1,6 @@
 <template>
   <div class="documentation">
-    <NuxtLink to="/" class="documentation__btn-home">
+    <NuxtLink to="/" class="documentation__btn-home" v-tatar>
       go home
     </NuxtLink>
     <div class="paper">
@@ -22,12 +22,12 @@ definePageMeta({
 const documentsStore = useDocumentsStore();
 
 onBeforeUnmount(() => {
-  documentsStore.setPaperText(text.value);
+  documentsStore.setPaperText(documentsStore.getPaperText);
   documentsStore.setFlagNeedRead(false);
 })
 
 const endTyping = (e) => {
-  text.value = e.target.innerText;
+  documentsStore.setPaperText(e.target.innerText);
 }
 
 const text = ref(documentsStore.getPaperText || '');

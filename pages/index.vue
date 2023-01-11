@@ -97,8 +97,8 @@
     </div>
     <img v-show="qrcodeHref" class="qrcode" :src="qrcodeHref" alt="QR Code"/>
     <NuxtLink to="documentation">
-      <PulsingElement :pulse="documentsStore.getFlagNeedRead">
-          <Icon class="lamp" name="ant-design:bulb-filled" style="width: 28px; height: 28px" />
+      <PulsingElement :pulse="documentsStore.getFlagNeedRead" class="lamp">
+          <Icon name="ant-design:bulb-filled" style="width: 28px; height: 28px" />
       </PulsingElement>
     </NuxtLink>
   </div>
@@ -175,6 +175,16 @@ body {
   padding: 15px;
   max-width: 110px;
   z-index: 2;
+}
+
+.lamp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px 20px 0 0;
+  color: ghostwhite;
+  z-index: 2;
+  cursor: pointer;
 }
 
 .computer-container {

@@ -33,36 +33,6 @@ export default defineNuxtConfig({
     build: {
         transpile: ['AppModal']
     },
-    vue: {
-        compilerOptions: {
-            isCustomElement: tag => ['AppModal'].includes(tag)
-        }
-    },
-    // i18n: {
-    //     locales: ['en', 'ua'],
-    //     defaultLocale: 'en',
-    //     vueI18n: {
-    //         fallbackLocale: 'en',
-    //         messages: {
-    //             en,
-    //             ua
-    //         }
-    //     }
-    // }
-    i18n: {
-        locales: ['en', 'ua'],
-        defaultLocale: 'en',
-        vueI18n: {
-            fallbackLocale: 'en',
-            messages: {
-                en: {
-                    lang: "ENG",
-                },
-                ua: {
-                    lang: "УКР"
-                }
-            }
-        }
-    },
-    ssr: true,
+    plugins: ['@/directives/pulse.ts'],
+    ssr: false,
 })
