@@ -1,83 +1,79 @@
 <template>
   <div>
     <div class="sticky-note-red" ref="stickyRed" :style="stickyRedStyle">
-          <div class="sticky-text">
-            {{ stickyTextRed }}
-          </div>
-          <div class="bottom-strip-1">
-          </div>
-        </div>
+      <div class="sticky-text"></div>
+      <div class="bottom-strip-1">
+      </div>
+    </div>
     <div class="sticky-note-yellow" ref="stickyYellow" :style="stickyYellowStyle">
-          <div class="sticky-text">
-            {{ stickyTextYellow }}
-          </div>
-          <div class="bottom-strip-2">
-          </div>
-        </div>
+      <div class="sticky-text"></div>
+      <div class="bottom-strip-2">
+      </div>
+    </div>
     <NuxtLink to="/macbook/login-page" class="computer-container">
       <div class="screen">
-        <img src="https://random.imagecdn.app/229/108" alt="logo" />
+        <img v-show="imgSrcDesktop" :src="imgSrcDesktop" alt="logo"/>
       </div>
       <div class="bottom-computer">
-          <div class="keyboard-container">
-            <div id="keyboard-row-1">
-              <div class="top-bar-1">
-              </div>
-              <div class="top-bar-2">
-              </div>
-              <div class="top-bar-3">
-              </div>
-              <div class="top-bar-4">
-              </div>
-              <div class="top-bar-5">
-              </div>
-              <div class="top-bar-6">
-              </div>
-              <div class="top-bar-7">
-              </div>
-              <div class="top-bar-8">
-              </div>
+        <div class="keyboard-container">
+          <div id="keyboard-row-1">
+            <div class="top-bar-1">
             </div>
-            <div id="keyboard-row-2">
-              <div class="mid-bar-1">
-              </div>
-              <div class="mid-bar-2">
-              </div>
-              <div class="mid-bar-3">
-              </div>
-              <div class="mid-bar-4">
-              </div>
-              <div class="mid-bar-5">
-              </div>
-              <div class="mid-bar-6">
-              </div>
-              <div class="mid-bar-7">
-              </div>
-              <div class="mid-bar-8">
-              </div>
+            <div class="top-bar-2">
             </div>
-
-            <div id="keyboard-row-3">
-              <div class="bottom-bar-1">
-              </div>
-              <div class="bottom-bar-2">
-              </div>
-              <div class="bottom-bar-3">
-              </div>
-              <div class="bottom-bar-4">
-              </div>
-              <div class="bottom-bar-5">
-              </div>
-              <div class="bottom-bar-6">
-              </div>
-              <div class="bottom-bar-7">
-              </div>
-              <div class="bottom-bar-8">
-              </div>
+            <div class="top-bar-3">
+            </div>
+            <div class="top-bar-4">
+            </div>
+            <div class="top-bar-5">
+            </div>
+            <div class="top-bar-6">
+            </div>
+            <div class="top-bar-7">
+            </div>
+            <div class="top-bar-8">
             </div>
           </div>
-          <div class="trackpad"></div>
+          <div id="keyboard-row-2">
+            <div class="mid-bar-1">
+            </div>
+            <div class="mid-bar-2">
+            </div>
+            <div class="mid-bar-3">
+            </div>
+            <div class="mid-bar-4">
+            </div>
+            <div class="mid-bar-5">
+            </div>
+            <div class="mid-bar-6">
+            </div>
+            <div class="mid-bar-7">
+            </div>
+            <div class="mid-bar-8">
+            </div>
+          </div>
+
+          <div id="keyboard-row-3">
+            <div class="bottom-bar-1">
+            </div>
+            <div class="bottom-bar-2">
+            </div>
+            <div class="bottom-bar-3">
+            </div>
+            <div class="bottom-bar-4">
+            </div>
+            <div class="bottom-bar-5">
+            </div>
+            <div class="bottom-bar-6">
+            </div>
+            <div class="bottom-bar-7">
+            </div>
+            <div class="bottom-bar-8">
+            </div>
+          </div>
         </div>
+        <div class="trackpad"></div>
+      </div>
     </NuxtLink>
     <div class="pen" ref="pen" :style="penStyle">
       <div class="cap"></div>
@@ -99,7 +95,12 @@
       <div class="start"></div>
       <div class="select"></div>
     </div>
-    <img class="qrcode" :src="qrcodeHref" alt="QR Code"/>
+    <img v-show="qrcodeHref" class="qrcode" :src="qrcodeHref" alt="QR Code"/>
+    <NuxtLink to="documentation">
+      <PulsingElement :pulse="documentsStore.getFlagNeedRead">
+          <Icon class="lamp" name="ant-design:bulb-filled" style="width: 28px; height: 28px" />
+      </PulsingElement>
+    </NuxtLink>
   </div>
 </template>
 
@@ -107,6 +108,10 @@
 import {ref} from 'vue'
 import {useDraggable} from '@vueuse/core'
 import {useQRCode} from '@vueuse/integrations/useQRCode'
+import axios from "axios";
+import {useDocumentsStore} from "../store/documents";
+
+const {$error} = useNuxtApp();
 
 definePageMeta({
   layout: 'desktop'
@@ -116,15 +121,26 @@ useHead({
   titleTemplate: '%s',
 })
 
+useAsyncData(() => {
+  axios.get("https://random.imagecdn.app/229/108")
+      .then(() => {
+        imgSrcDesktop.value = "https://random.imagecdn.app/229/108";
+      })
+      .catch((error) => {
+        $error(error);
+      })
+})
+
 const qrcodeHref = useQRCode('https://www.instagram.com/ilya__sharafeev/');
-const stickyTextRed = ref(null);
-const stickyTextYellow = ref(null);
+const imgSrcDesktop = ref(null);
 
 const gameboy = ref(null);
 const stickyRed = ref(null);
 const stickyYellow = ref(null);
 const pen = ref(null);
 const mouse = ref(null);
+
+const documentsStore = useDocumentsStore();
 
 const gamebodyStyle = useDraggable(gameboy, {
   initialValue: {x: 500, y: 700},

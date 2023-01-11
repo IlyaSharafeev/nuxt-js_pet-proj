@@ -1,21 +1,22 @@
 import { defineStore } from 'pinia'
+import {CreateFolder, EditableFolder, positionCursor} from "~/interfaces/folders";
 
 export const useDesktopStore = defineStore({
   id: 'desktop-store',
   state: () => {
     return {
       auth: {
-        name: null,
+        name: '',
       },
       editMode: false,
       removeMode: false,
-      editFolder: null,
-      copyFolder: null,
+      editFolder: '',
+      copyFolder: {},
       positionPointer: {
-        x: null,
-        y: null,
+        x: 0,
+        y: 0,
       },
-      background: 'https://github.com/seuraltimez/desktopmac/blob/master/img/src/bg.jpg?raw=true',
+      background: 'https://github.com/seuraltimez/desktopmac/blob/master/img/src/bg.jpg?raw=true' || '',
       folders: [
         {
           id: 0,
@@ -33,10 +34,10 @@ export const useDesktopStore = defineStore({
     }
   },
   actions: {
-    setAuthName(name) {
+    setAuthName(name: string) {
       this.auth.name = name;
     },
-    assignEditFolder(folderId) {
+    assignEditFolder(folderId: string) {
       this.editFolder = folderId;
     },
     offEditMode() {
@@ -51,31 +52,31 @@ export const useDesktopStore = defineStore({
     onRemoveMode() {
       this.removeMode = true;
     },
-    changeFolderName(editableFolder) {
+    changeFolderName(editableFolder: EditableFolder) {
       this.folders = this.folders.map((folder) => (
         folder.id === editableFolder.id ? {...folder, title: editableFolder.title} : folder
       ));
       this.offEditMode();
     },
-    removeFolder(removeFolder) {
+    removeFolder(removeFolder: string) {
       this.folders = this.folders.filter((elem) => {
         return elem.id !== +removeFolder;
       })
       this.offRemoveMode();
     },
-    createFolder(createFolder) {
+    createFolder(createFolder: CreateFolder) {
       this.folders.push(createFolder);
     },
-    setPositionPointer(position) {
+    setPositionPointer(position: positionCursor) {
       this.positionPointer.x = position.x;
       this.positionPointer.y = position.y;
     },
-    setCopyFolder(folderId) {
+    setCopyFolder(folderId: number) {
       this.copyFolder = this.foldersList.filter((obj) => {
         return obj.id == folderId;
       })[0];
     },
-    insertFolder(folder) {
+    insertFolder(folder: CreateFolder) {
       this.folders.push(folder);
     },
   },

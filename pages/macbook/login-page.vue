@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-login-page">
     <h1>Sign up</h1>
     <h2>and go to desktop</h2>
     <form>
@@ -71,10 +71,7 @@ function next(target) {
   let input = target.previousElementSibling;
 
   // Check if input is empty
-  if (input.value === '') {
-    window.document.body.classList.add('error');
-  } else {
-    window.document.body.classList.remove('error');
+  if (input.value !== '') {
     activeList.value++;
   }
 }
@@ -117,14 +114,15 @@ const login = () => {
 };
 </script>
 
-<style lang="sass">
-body
+<style lang="sass" scoped>
+div.container-login-page
   background: hsl(120, 60, 50)
+  height: 100vh
 
   fieldset
     box-shadow: 0 8px 10px hsl(120, 60, 40)
 
-body.error
+div.container-login-page.error
   background: hsl(16, 100, 47)
 
   fieldset

@@ -30,6 +30,14 @@ export default defineNuxtConfig({
         'nuxt-icon',
         '@pinia/nuxt',
     ],
+    build: {
+        transpile: ['AppModal']
+    },
+    vue: {
+        compilerOptions: {
+            isCustomElement: tag => ['AppModal'].includes(tag)
+        }
+    },
     // i18n: {
     //     locales: ['en', 'ua'],
     //     defaultLocale: 'en',
