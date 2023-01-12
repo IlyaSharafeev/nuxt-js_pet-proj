@@ -9,29 +9,29 @@
         <li :class="{'active': activeList === 3}"></li>
         <li :class="{'active': activeList === 4}"></li>
       </ul>
-      <fieldset class="name" v-if="activeList === 1" :class="{'enable': activeList === 1}">
+      <div class="name" id="input" v-if="activeList === 1" :class="{'enable': activeList === 1}">
         <div class="icon left"><em class="user"></em></div>
         <input type="text" name="username" placeholder="Username" v-model="v$.name.$model"/>
         <div class="icon right button"><em class="arrow"></em></div>
         <p v-if="v$.name.$error" class="error">{{ v$.name.$errors[0].$message }}</p>
-      </fieldset>
-      <fieldset class="email" v-if="activeList === 2" :class="{'enable': activeList === 2}">
+      </div>
+      <div class="email" id="input" v-if="activeList === 2" :class="{'enable': activeList === 2}">
         <div class="icon left"><em class="letter"></em></div>
         <input type="email" name="email" placeholder="Email" v-model.trim="v$.email.$model"/>
         <div class="icon right button"><em class="arrow"></em></div>
         <p v-if="v$.email.$error" class="error">{{ v$.email.$errors[0].$message }}</p>
-      </fieldset>
-      <fieldset class="password" v-if="activeList === 3" :class="{'enable': activeList === 3}">
+      </div>
+      <div class="password" id="input" v-if="activeList === 3" :class="{'enable': activeList === 3}">
         <div class="icon left"><em class="lock"></em></div>
-        <input type="password" name="password" placeholder="Password" v-model.trim="v$.password.$model"/>
+        <input type="password" name="password" placeholder="Password" autocomplete="on" v-model.trim="v$.password.$model"/>
         <div class="icon right button"><em class="arrow"></em></div>
         <p v-if="v$.password.$error" class="error">{{ v$.password.$errors[0].$message }}</p>
-      </fieldset>
-      <fieldset class="thanks" v-if="activeList === 4" :class="{'enable': activeList === 4}" @click="login">
+      </div>
+      <div class="thanks" id="input" v-if="activeList === 4" :class="{'enable': activeList === 4}" @click="login">
         <div class="icon left"><em class="heart"></em></div>
         <p>go to desktop</p>
         <div class="icon right"><em class="heart"></em></div>
-      </fieldset>
+      </div>
     </form>
   </div>
 </template>
@@ -78,7 +78,7 @@ function next(target) {
 
 function keyDown(event) {
   let key = event.keyCode,
-      target = document.querySelector('fieldset.enable .button');
+      target = document.querySelector('div.enable .button');
   if (activeList.value === 1 && v$.value.name.$error) {
     activeList.value = 1;
     return;
@@ -119,13 +119,13 @@ div.container-login-page
   background: hsl(120, 60, 50)
   height: 100vh
 
-  fieldset
+  div#input
     box-shadow: 0 8px 10px hsl(120, 60, 40)
 
 div.container-login-page.error
   background: hsl(16, 100, 47)
 
-  fieldset
+  div#input
     box-shadow: 0 8px 10px hsl(16, 100, 37)
 
 h1, h2
@@ -175,7 +175,7 @@ form
   left: 50%
   transform: translate(-50%, -50%)
 
-  fieldset
+  div#input
     position: absolute
     width: 300px
     height: 60px
@@ -184,6 +184,10 @@ form
     opacity: 0
     transform: scale(0.2)
     transition: all 0.4s ease-in-out
+
+    .error
+      color: red
+      font-weight: bold
 
     input, p
       display: inline-block
@@ -230,19 +234,19 @@ form
       border-radius: 3px
       transition: all 0.4s ease
 
-  fieldset.enable
+  div#input.enable
     z-index: 1
     opacity: 1
     transition: all 0.5s ease-out 0.2s
     transform: scale(1)
     animation: enable 0.5s ease-out 0.2s
 
-  fieldset.disable
+  div#input.disable
     opacity: 0
     transition: all 0.3s ease-in
     transform: translateY(120px) scale(0.9)
 
-body.error fieldset
+body.error div#input
   transform-origin: 50% 100%
   animation: error 0.3s ease-out
 
@@ -368,8 +372,4 @@ body.error fieldset
 
   &::after
     top: -6px
-
-.error
-  color: red
-  font-weight: bold
 </style>

@@ -11,24 +11,6 @@
           </NuxtLink>
         </div>
         <div class="menu_topbar_right">
-          <!--          <div class="lang">-->
-          <!--            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-          <!--              <img v-if="$i18n.getLocaleCookie() === 'ua'" src="@/assets/images/english-flag.png" alt="ukraine-flag">-->
-          <!--              <img v-if="$i18n.getLocaleCookie() === 'en'" src="@/assets/images/ukraine-flag.jpg" alt="english-flag">-->
-          <!--            </button>-->
-          <!--            <ul class="dropdown-menu">-->
-          <!--              <li>-->
-          <!--                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'ua'" href="#" @click.prevent.stop="$i18n.setLocale('en')">-->
-          <!--                  <img src="@/assets/images/ukraine-flag.jpg"/>-->
-          <!--                  {{$t('lang')}}-->
-          <!--                </a>-->
-          <!--                <a class="dropdown-item" v-if="$i18n.getLocaleCookie() === 'en'" href="#" @click.prevent.stop="$i18n.setLocale('ua')">-->
-          <!--                  <img src="@/assets/images/english-flag.png"/>-->
-          <!--                  {{$t('lang')}}-->
-          <!--                </a>-->
-          <!--              </li>-->
-          <!--            </ul>-->
-          <!--          </div>-->
           <div class="battery">
             <span>{{ getBatteryLevel() }}%</span>
             <img v-if="charging" src="@/assets/images/charging-battery.png" alt="charging-battery"/>
@@ -66,7 +48,7 @@
 
 <script setup>
 import {useBattery} from '@vueuse/core'
-import {onMounted, ref} from "vue";
+import {onBeforeUnmount, onMounted, ref} from "vue";
 import ThePopoverDesktopPage from "/components/ThePopoverDesktopPage.vue";
 import FoldersDesktop from "../../components/FoldersDesktop";
 import {useDesktopStore} from "../../store/desktop";
@@ -89,6 +71,13 @@ onMounted(() => {
     return false;
   };
   document.body.style.background = `url(${desktopStore.background})`;
+})
+
+onBeforeUnmount(() => {
+  document.oncontextmenu = function () {
+    mouseRightClick(event)
+    return true;
+  };
 })
 
 const getBatteryLevel = () => {

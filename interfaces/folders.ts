@@ -9,8 +9,3 @@ export interface CreateFolder {
     id: number,
     title: string,
 }
-
-export interface positionCursor {
-    x: number,
-    y: number,
-}

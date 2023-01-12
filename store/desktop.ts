@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import {CreateFolder, EditableFolder, positionCursor} from "~/interfaces/folders";
+import {CreateFolder, EditableFolder} from "~/interfaces/folders";
+import {PositionCursor} from "~/interfaces/cursor";
 
 export const useDesktopStore = defineStore({
   id: 'desktop-store',
@@ -67,7 +68,7 @@ export const useDesktopStore = defineStore({
     createFolder(createFolder: CreateFolder) {
       this.folders.push(createFolder);
     },
-    setPositionPointer(position: positionCursor) {
+    setPositionPointer(position: PositionCursor) {
       this.positionPointer.x = position.x;
       this.positionPointer.y = position.y;
     },

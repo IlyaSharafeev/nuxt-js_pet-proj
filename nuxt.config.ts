@@ -1,7 +1,3 @@
-// import ua from '@/lang/ua';
-// import en from '@/lang/en';
-
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     css: [
         '@/assets/styles/index.scss'
